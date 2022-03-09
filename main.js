@@ -8,6 +8,7 @@
 
 // let table = document.getElementsByClassName("table")[0];
 
+
 // for (let index = 0; index < table.rows.length; index++) {
 
 //     for (let index1 = 0; index1 < table.rows[index].cells.length; index1++) {
@@ -18,3 +19,18 @@
 // }
 
 // console.log(table)
+
+let list = document.getElementById('list');
+
+function chekList(list) {
+
+    for (const element of list.children) {
+        let getListChildCount = Array.from(element.querySelectorAll("li"));
+        alert(element.firstChild.data + ":" + getListChildCount.length)
+        if (element.children.length !== 0 && element.firstElementChild.nodeName === "UL") {
+            chekList(element.firstElementChild)
+        }
+    }
+}
+
+chekList(list)
