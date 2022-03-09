@@ -20,17 +20,71 @@
 
 // console.log(table)
 
-let list = document.getElementById('list');
+// Topic 4 task 1
 
-function chekList(list) {
+// let list = document.getElementById('list');
 
-    for (const element of list.children) {
-        let getListChildCount = Array.from(element.querySelectorAll("li"));
-        alert(element.firstChild.data + ":" + getListChildCount.length)
-        if (element.children.length !== 0 && element.firstElementChild.nodeName === "UL") {
-            chekList(element.firstElementChild)
-        }
-    }
+// function chekList(list) {
+
+//     for (const element of list.children) {
+//         let getListChildCount = Array.from(element.querySelectorAll("li"));
+//         alert(element.firstChild.data + ":" + getListChildCount.length)
+//         if (element.children.length !== 0 && element.firstElementChild.nodeName === "UL") {
+//             chekList(element.firstElementChild)
+//         }
+//     }
+// }
+
+// chekList(list)
+
+
+// Topic 6 task Выведите список потомков в дереве
+
+// let list = document.getElementById('list');
+
+// function chekList(list) {
+
+//     for (const element of list.children) {
+//         let getListChildCount = Array.from(element.querySelectorAll("li"));
+//         if (getListChildCount.length > 0) {
+//             element.firstChild.data += `[${getListChildCount.length}]`
+//         }
+//         if (element.children.length !== 0 && element.firstElementChild.nodeName === "UL") {
+//             chekList(element.firstElementChild)
+//         }
+//     }
+// }
+
+// chekList(list)
+
+
+
+// Topic 6 task Очистите элемент
+
+
+// let ol = document.getElementById('elem');
+
+// let clear = (list) => ol.innerHTML = "";
+
+// clear(ol);
+
+// console.log(ol);
+
+
+
+let clockContainer = document.getElementsByClassName("clock")[0];
+
+
+
+function stopButtonFunc() {
+    clearInterval(start);
 }
 
-chekList(list)
+const start = setInterval(startButtonFunc, 1000);
+
+function startButtonFunc() {
+    today = new Date();
+    setInterval(() => 1000)
+    let date = today.getHours() + ':' + (today.getMinutes()) + ':' + today.getSeconds();
+    clockContainer.innerHTML = date
+}
