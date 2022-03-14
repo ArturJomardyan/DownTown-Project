@@ -1,3 +1,4 @@
+
 #bagua-table th {
     text-align: center;
     font-weight: bold;
@@ -10,50 +11,14 @@
     vertical-align: bottom;
     padding-top: 5px;
     padding-bottom: 12px;
+    border: 1px solid black;
+    background-color: beige;
 }
-
-#bagua-table .nw {
-    background: #999;
+.okBtn{
+position: absolute;
 }
+.textarea{
+    width: auto;
+    height: auto;
 
-#bagua-table .n {
-    background: #03f;
-    color: #fff;
-}
-
-#bagua-table .ne {
-    background: #ff6;
-}
-
-#bagua-table .w {
-    background: #ff0;
-}
-
-#bagua-table .c {
-    background: #60c;
-    color: #fff;
-}
-
-#bagua-table .e {
-    background: #09f;
-    color: #fff;
-}
-
-#bagua-table .sw {
-    background: #963;
-    color: #fff;
-}
-
-#bagua-table .s {
-    background: #f60;
-    color: #fff;
-}
-
-#bagua-table .se {
-    background: #0c3;
-    color: #fff;
-}
-
-#bagua-table .highlight {
-    background: red;
 }
