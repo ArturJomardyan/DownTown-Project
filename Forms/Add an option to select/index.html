@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add an option to select</title>
+</head>
+
+<body>
+    <select id="genres">
+        <option value="rock">Rock</option>
+        <option value="blues" selected>Blues</option>
+        <option value="rap">Rap</option>
+        <option value="classic">Classic</option>
+    </select>
+    <h3>Your Choice:<span id="choice"></span></h3>
+
+    <script>
+        let selectedElement = document.getElementById("genres");
+        let resualt = document.getElementById("choice");
+        selectedElement.onchange = function() {
+            resualt.innerText =
+                `Value:${this.children[this.selectedIndex].value},Text:${this.children[this.selectedIndex].innerText}`
+        }
+        option = new Option("Folk", "folk");
+        option.selected = true;
+        selectedElement.append(option)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etitable Div</title>
+    <style>
+        #editableDiv {
+            border: 1px solid black;
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div tabindex="0" id="editableDiv">
+        <h3>For Example</h3>
+        <p>For Example</p>
+    </div>
+    <textarea id="text" style="display: none;" cols="30" rows="10"></textarea>
+
+
+    <script>
+        let div = document.getElementById("editableDiv");
+        let textArea = document.getElementById("text");
+
+        div.onfocus = function() {
+            textArea.style.display = "block";
+            div.style.display = "none";
+            textArea.value = div.innerHTML
+        };
+
+        textArea.onblur = function() {
+            div.style.display = "block";
+            textArea.style.display = "none";
+            div.innerHTML = textArea.value
+        }
+    </script>
+</body>
+
+</html>
