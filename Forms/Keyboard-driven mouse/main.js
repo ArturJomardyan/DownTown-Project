@@ -7,37 +7,45 @@ mouse.tabIndex = 0;
 mouse.onfocus = function f() {
 
     document.addEventListener("keydown", function(event) {
-        if (event.key === "ArrowRight") {
-            if (parseInt(mouse.style.left) + mouse.offsetWidth < window.innerWidth) {
-                console.log(mouse.style.right);
+        let margin_left = parseInt(mouse.style.left)
+        let mouse_width = mouse.offsetWidth;
+        let window_width = window.innerWidth;
 
-                mouse.style.left = parseInt(mouse.style.left) + mouse.offsetWidth + "px";
+        let margin_top = parseInt(mouse.style.top);
+        let mouse_height = mouse.offsetHeight;
+        let window_height = window.innerHeight
+
+        if (event.key === "ArrowRight") {
+            if (margin_left + mouse_width < window_width - mouse_width - 8) {
+                mouse.style.left = margin_left + mouse_width + "px";
+                console.log(mouse.style.right);
+            } else {
+                mouse.style.left = window_width - margin_left - mouse_width + margin_left - 8 + "px";
             }
         }
         if (event.key === "ArrowLeft") {
-            if (parseInt(mouse.style.left) + mouse.offsetWidth < window.innerWidth && parseInt(mouse.style.left) > 8) {
-                mouse.style.left = parseInt(mouse.style.left) - mouse.offsetWidth + "px";
-                console.log()
+
+            if (margin_left + 8 > mouse_width) {
+                mouse.style.left = margin_left - mouse_width + "px";
             } else {
                 mouse.style.left = 8 + "px"
             }
         }
         if (event.key === "ArrowDown") {
 
-            if (parseInt(mouse.style.top) + mouse.offsetHeight < window.innerHeight) {
-                mouse.style.top = parseInt(mouse.style.top) + mouse.offsetHeight + "px";
+            if (margin_top + mouse_height < window_height - mouse_height - 8) {
+                mouse.style.top = margin_top + mouse_height + "px";
             } else {
-                console.log(mouse.style.top)
+                console.log(55);
+                mouse.style.top = window_height - margin_top - mouse_height + margin_top - 22 + "px";
             }
         }
         if (event.key === "ArrowUp") {
 
-            if (parseInt(mouse.style.top) - mouse.offsetHeight < window.innerHeight &&
-                parseInt(mouse.style.top) - mouse.offsetHeight > 0) {
-                mouse.style.top = parseInt(mouse.style.top) - mouse.offsetHeight + "px";
+            if (margin_top - mouse_height < window_height && margin_top - mouse_height > 0) {
+                mouse.style.top = margin_top - mouse_height + "px";
             } else {
                 mouse.style.top = 50 + "px"
-
             }
         }
 
