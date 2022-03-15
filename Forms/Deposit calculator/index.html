@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit Calculator</title>
+    <style>
+        #was_graph {
+            background-color: red;
+            width: 55px;
+            height: 200px;
+        }
+        
+        #root_was_graph {
+            width: 55px;
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+        }
+        
+        #become_graph {
+            background-color: green;
+            width: 55px;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <caption>Deposit Calculator</caption>
+        <tr>
+            <td>Initial deposit (min.1000 $) </td>
+            <td><input min="1000" value="1000" type="number"></td>
+        </tr>
+        <tr>
+            <td>How many months?</td>
+            <td>
+                <select name="months">
+                <option value="3">3 (minimum)</option>
+                <option value="6">6 (half-year)</option>
+                <option value="12" selected="">12 (one year)</option>
+                <option value="18">18 (1.5 years)</option>
+                <option value="24">24 (2 years)</option>
+                <option value="30">30 (2.5 years)</option>
+                <option value="36">36 (3 years)</option>
+                <option value="60">60 (5   years)</option>
+              </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Interest per year?</td>
+            <td><input name="interest" type="number" min="5" value="5"></td>
+        </tr>
+        <tr>
+            <td>
+                <p>Was:<span></span></p>
+            </td>
+            <td>
+                <p>Become:<span id="number_for_Become"></span></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="root_was_graph">
+                    <div id="was_graph"></div>
+                </div>
+            </td>
+            <td>
+                <div id="become_graph"></div>
+            </td>
+        </tr>
+    </table>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
