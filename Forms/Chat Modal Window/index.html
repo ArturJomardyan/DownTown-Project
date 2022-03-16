@@ -10,14 +10,14 @@
 </head>
 
 <body>
-    <button id="submitBtn" onclick="document.forms[0].style.display = 'block',this.nextElementSibling.style.display = 'block'" type="submit">Open Modal Window</button>
+    <button id="submitBtn" onclick="open_modal(event)" type="submit">Open Modal Window</button>
 
     <div hidden="true" class="root_form"></div>
-    <form hidden="true" class="show">
+    <form hidden="true" onsubmit="false" class="show">
         <p>Please Text messege...</p>
-        <textarea name="text" id="" cols="30" rows="10"></textarea>
-        <input type="submit" value="submit">
-        <input type="button" value="cancele" onclick="document.forms[0].style.display = 'none',this.parentElement.previousElementSibling.style.display = 'none'">
+        <textarea name="text" cols="30" rows="10"></textarea>
+        <input type="submit" onclick="submitFunc()" value="submit">
+        <input onclick="close_modal(event)" type="button" value="cancele">
     </form>
     <script src="main.js"></script>
 </body>
