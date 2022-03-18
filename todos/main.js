@@ -47,27 +47,37 @@ chek_clearList_btns_visibility();
 const myForm = document.getElementById("mainForm");
 
 function createTodo({ id, text, checked }) {
+
     const forCloneForm = document.querySelector(".create-todo.for-clone");
     const createTodoForm = forCloneForm.cloneNode(true);
     createTodoForm.classList.remove("hide");
     createTodoForm.classList.remove("for-clone");
     createTodoForm.children[0].checked = checked;
-    createTodoForm.children[1].value = text
-    createTodoForm.children[0].onclick = checkBoxCheck
-    myForm.after(createTodoForm);
-
-    localStorageTodos = localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : [];
-    const obj = { id: id || localStorageTodos.length + 1, text, checked };
-
-    if (!localStorageTodos.some((item) => item.id === obj.id)) {
-        localStorageTodos.push(obj);
-        localStorage.setItem("todos", JSON.stringify(localStorageTodos));
+    if (createTodoForm.children[0].checked === true) {
+        createTodoForm.children[1].style.textDecoration = "line-through";
+        createTodoForm.children[1].style.color = "#d9d9d9";
     }
-    statusCounter();
-    chek_clearList_btns_visibility();
+    if (text === "") {
+        alert("filed can`t be empty")
+    } else {
+        createTodoForm.children[1].value = text
+        createTodoForm.children[0].onclick = checkBoxCheck
+        myForm.after(createTodoForm);
+
+        localStorageTodos = localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : [];
+        const obj = { id: id || localStorageTodos.length + 1, text, checked };
+
+        if (!localStorageTodos.some((item) => item.id === obj.id)) {
+            localStorageTodos.push(obj);
+            localStorage.setItem("todos", JSON.stringify(localStorageTodos));
+        }
+        statusCounter();
+        chek_clearList_btns_visibility();
+    }
 }
 
 function renderTodos(todos) {
+
     const visibleTodos = document.querySelectorAll(".create-todo:not(.for-clone)");
     visibleTodos.forEach((element) => element.remove());
     todos.forEach((item) => {
@@ -78,7 +88,6 @@ function renderTodos(todos) {
 }
 
 myForm.textInput.addEventListener("keydown", function handleKeyDown(event) {
-
     if (event.keyCode === 13) {
         createTodo({ text: event.target.value, checked: false });
         event.target.value = "";
@@ -99,6 +108,7 @@ function checkBoxCheck() {
             break;
         }
     }
+    // two elements from the list are superfluous, and we need reversed index for to get target element
     child_index = length - child_index - 2;
     localStorageTodos = JSON.parse(localStorage.getItem("todos"));
     console.log(localStorageTodos);
@@ -117,4 +127,5 @@ function checkBoxCheck() {
     chek_clearList_btns_visibility();
 
 }
+
 statusCounter()
