@@ -18,14 +18,14 @@
         </form>
 
         <div id="bottomMenu" class="hide">
-            <p id="elementsCount"></p>
-
             <input id=" statusAll " type="radio " name="status " value="All ">
             <label for="statusAll ">All</label>
             <p class="all_count ">0</p>
+
             <input id="statusActive " type="radio " name="status " value="Active ">
             <label for="statusActive " for="statusSort ">Active</label>
             <p class="active_count ">0</p>
+
             <input id="statusCompleted " type="radio " name="status " value="Completed ">
             <label for="statusCompleted " for="statusSort ">Completed</label>
             <p class="completed_count ">0</p>
@@ -39,7 +39,15 @@
         <input name="checkbox" type="checkbox">
         <input name="textInput" type="text" disabled="" value="">
         <button type="button" class="buttonDeleteRow">X</button>
+        <button type="button" class="buttonEditRow">Edit</button>
     </form>
+<!-- 
+    <div hidden="true" class="root_form"></div>
+    <form hidden="true" onsubmit="false" class="popup">
+        <textarea name="text" cols="30" rows="10"></textarea>
+        <input class="popupBtn" type="submit" onclick="submitFunc()" value="submit">
+        <input class="popupBtn" onclick="close_modal(event)" type="button" value="cancele">
+    </form> -->
 
     <script src="main.js "></script>
 </body>

@@ -1,4 +1,4 @@
-function open_modal(event) {
+function open_modal() {
     document.forms[0].style.display = 'block'
     document.forms[0].previousElementSibling.style.display = 'block'
 }

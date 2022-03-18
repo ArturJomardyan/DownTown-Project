@@ -112,7 +112,29 @@ input[type="checkbox"] {
     position: relative;
     box-shadow: 0px 10px 0px -5px #f6f6f6, 0px 10px 0px -4px #c5c5c5, 0px 20px 0px -10px #f6f6f6, 0px 20px 0px -9px #c5c5c5;
 }
+#bottomMenu>input {
+    display: none
+}
 
+#bottomMenu>input:checked {
+    background-color: #af5b5e;
+}
+
+#bottomMenu>label {
+    padding: 5px;
+    cursor: pointer;
+}
+
+#bottomMenu>label:hover {
+    padding: 5px;
+    cursor: pointer;
+    border: 1px solid rgb(206, 203, 203);
+}
+
+#bottomMenu>input:checked+label {
+    background: rgb(245, 238, 238);
+    border: 1px solid rgb(206, 203, 203);
+}
 #activeAmount {
     position: absolute;
     left: 15px;
@@ -154,7 +176,7 @@ input[type="checkbox"] {
     background-color: #ededed;
 }
 
-.create-todo:hover :last-child {
+.create-todo:hover button {
     display: block;
 }
 
@@ -175,28 +197,26 @@ input[type="checkbox"] {
     background-color: red;
     border-radius: 50%;
 }
-#bottomMenu>input {
-    display: none
-}
-
-#bottomMenu>input:checked {
-    background-color: #af5b5e;
-}
-
-#bottomMenu>label {
-    padding: 5px;
+.buttonEditRow{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 70px;
+    display: none;
+    background-color: rgb(146, 140, 140);
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    text-align: center;
     cursor: pointer;
 }
-
-#bottomMenu>label:hover {
-    padding: 5px;
-    cursor: pointer;
-    border: 1px solid rgb(206, 203, 203);
+.buttonEditRow:hover{
+    background-color: rgb(62, 100, 0);
+    border-radius: 30%;
 }
+.submitPopUp{
+    width: 60px;
 
-#bottomMenu>input:checked+label {
-    background: rgb(245, 238, 238);
-    border: 1px solid rgb(206, 203, 203);
 }
 
 del::before,
@@ -223,3 +243,4 @@ del::after {
     margin: 7px;
     padding: 4px;
 }
+

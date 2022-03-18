@@ -77,6 +77,7 @@ function createTodo({ id, text, checked }) {
         createTodoForm.children[0].onclick = checkBoxCheck
         createTodoForm.children[1].value = text
         createTodoForm.children[2].onclick = deleteRow
+        // createTodoForm.children[3].onclick = open_modal
         myForm.after(createTodoForm);
         localStorageTodos = localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : [];
         const obj = { id: id || localStorageTodos.length + 1, text, checked };
@@ -148,7 +149,6 @@ function checkBoxCheck() {
 
 statusCounter()
 
-// let deleteRowButton = document.getElementsByClassName("buttonDeleteRow")[0];
  function deleteRow() {
     let child_index = getTargetIndex(this)
     localStorageTodos.splice(child_index,1);
@@ -157,4 +157,11 @@ statusCounter()
     chek_clearList_btns_visibility();
     renderTodos(localStorageTodos);
 }
+
+// function open_modal() {
+//     document.getElementsByClassName("popup")[0].style.display = 'block'
+//     document.getElementsByClassName("root_form")[0].style.display = 'block'
+// }
+
+
 
