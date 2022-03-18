@@ -27,9 +27,19 @@ clearAllButton.onclick = function() {
     chek_clearList_btns_visibility();
 }
 
-// clearComplitedButton.onclick = function(){
-   
-// }
+clearComplitedButton.onclick = function(){
+    for (let i = 0; i < localStorageTodos.length; i++) {
+    if(localStorageTodos[i].checked === true){
+        localStorageTodos.splice(i,1);
+        i--;
+    }
+}
+localStorage.setItem("todos", JSON.stringify(localStorageTodos));
+clearComplitedButton.classList.add("hide");
+renderTodos(localStorageTodos);
+statusCounter()
+chek_clearList_btns_visibility();
+}
 
 function chek_clearList_btns_visibility() {
     if (all_count.innerHTML === "0") {
@@ -64,10 +74,10 @@ function createTodo({ id, text, checked }) {
     if (text === "") {
         alert("filed can`t be empty")
     } else {
-        createTodoForm.children[1].value = text
         createTodoForm.children[0].onclick = checkBoxCheck
+        createTodoForm.children[1].value = text
+        createTodoForm.children[2].onclick = deleteRow
         myForm.after(createTodoForm);
-
         localStorageTodos = localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : [];
         const obj = { id: id || localStorageTodos.length + 1, text, checked };
 
@@ -121,8 +131,6 @@ function getTargetIndex(element){
 
 function checkBoxCheck() {
     let child_index = getTargetIndex(this)
-    localStorageTodos = JSON.parse(localStorage.getItem("todos"));
-    console.log(localStorageTodos);
     if (localStorageTodos[child_index].checked === false) {
         this.nextElementSibling.style.textDecoration = "line-through";
         this.nextElementSibling.style.color = "#d9d9d9";
@@ -134,7 +142,6 @@ function checkBoxCheck() {
     }
     localStorage.setItem("todos", JSON.stringify(localStorageTodos));
     statusCounter();
-    console.log(555);
     chek_clearList_btns_visibility();
 
 }
@@ -142,6 +149,12 @@ function checkBoxCheck() {
 statusCounter()
 
 // let deleteRowButton = document.getElementsByClassName("buttonDeleteRow")[0];
-// deleteRowButton.onclick = function (){
+ function deleteRow() {
+    let child_index = getTargetIndex(this)
+    localStorageTodos.splice(child_index,1);
+    localStorage.setItem("todos", JSON.stringify(localStorageTodos));
+    statusCounter();
+    chek_clearList_btns_visibility();
+    renderTodos(localStorageTodos);
+}
 
-// }

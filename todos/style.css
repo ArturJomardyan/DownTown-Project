@@ -164,8 +164,17 @@ input[type="checkbox"] {
     transform: translateY(-50%);
     right: 20px;
     display: none;
+    background-color: rgb(146, 140, 140);
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    text-align: center;
+    cursor: pointer;
 }
-
+.buttonDeleteRow:hover{
+    background-color: red;
+    border-radius: 50%;
+}
 #bottomMenu>input {
     display: none
 }
