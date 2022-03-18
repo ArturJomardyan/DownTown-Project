@@ -192,3 +192,9 @@ del::before {
 del::after {
     content: " [deletion end] ";
 }
+
+#clearAll,
+#clearComplited {
+    margin: 7px;
+    padding: 4px;
+}
