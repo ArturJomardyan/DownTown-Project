@@ -1,4 +1,4 @@
-const localStorageTodos = JSON.parse(localStorage.getItem("todos")) || [];
+let localStorageTodos = JSON.parse(localStorage.getItem("todos")) || [];
 
 let all_count = document.getElementsByClassName("all_count")[0];
 let active_count = document.getElementsByClassName("active_count")[0];
@@ -71,7 +71,6 @@ myForm.textInput.addEventListener("keydown", function handleKeyDown(event) {
 renderTodos(localStorageTodos);
 
 function checkBoxCheck() {
-    console.log(555);
     let parent = this.parentElement.parentElement;
     let childCollection = parent.children
     let length = childCollection.length
@@ -84,7 +83,8 @@ function checkBoxCheck() {
         }
     }
     child_index = length - child_index - 2;
-
+    localStorageTodos = JSON.parse(localStorage.getItem("todos"));
+    console.log(localStorageTodos);
     if (localStorageTodos[child_index].checked === false) {
         this.nextElementSibling.style.textDecoration = "line-through";
         this.nextElementSibling.style.color = "#d9d9d9";
@@ -93,7 +93,6 @@ function checkBoxCheck() {
         this.nextElementSibling.style.textDecoration = "none";
         this.nextElementSibling.style.color = "#4d4d4d";
         localStorageTodos[child_index].checked = false;
-
     }
     localStorage.setItem("todos", JSON.stringify(localStorageTodos));
     statusCounter()
