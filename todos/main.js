@@ -27,6 +27,10 @@ clearAllButton.onclick = function() {
     chek_clearList_btns_visibility();
 }
 
+// clearComplitedButton.onclick = function(){
+   
+// }
+
 function chek_clearList_btns_visibility() {
     if (all_count.innerHTML === "0") {
         clearAllButton.classList.add("hide");
@@ -96,20 +100,27 @@ myForm.textInput.addEventListener("keydown", function handleKeyDown(event) {
 
 renderTodos(localStorageTodos);
 
-function checkBoxCheck() {
-    let parent = this.parentElement.parentElement;
+
+
+function getTargetIndex(element){
+    let parent = element.parentElement.parentElement;
     let childCollection = parent.children
     let length = childCollection.length
     let child_index;
 
     for (let i = 0; i < length; ++i) {
-        if (this.parentElement === childCollection[i]) {
+        if (element.parentElement === childCollection[i]) {
             child_index = i;
             break;
         }
     }
     // two elements from the list are superfluous, and we need reversed index for to get target element
     child_index = length - child_index - 2;
+    return child_index
+}
+
+function checkBoxCheck() {
+    let child_index = getTargetIndex(this)
     localStorageTodos = JSON.parse(localStorage.getItem("todos"));
     console.log(localStorageTodos);
     if (localStorageTodos[child_index].checked === false) {
@@ -129,3 +140,8 @@ function checkBoxCheck() {
 }
 
 statusCounter()
+
+// let deleteRowButton = document.getElementsByClassName("buttonDeleteRow")[0];
+// deleteRowButton.onclick = function (){
+
+// }
