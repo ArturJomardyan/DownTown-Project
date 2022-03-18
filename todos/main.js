@@ -23,13 +23,26 @@ clearAllButton.onclick = function() {
     localStorage.setItem("todos", JSON.stringify(localStorageTodos));
     clearAllButton.classList.add("hide");
     renderTodos(localStorageTodos);
+    statusCounter()
+    chek_clearList_btns_visibility();
 }
 
-function chek_clearList_btn_visibility() {
-    all_count.innerHTML !== "0" && clearAllButton.classList.remove("hide");
-    completed_count.innerHTML !== "0" && clearComplitedButton.classList.remove("hide");
+function chek_clearList_btns_visibility() {
+    if (all_count.innerHTML === "0") {
+        clearAllButton.classList.add("hide");
+        clearComplitedButton.classList.add("hide");
+    } else {
+
+        clearAllButton.classList.remove("hide");
+
+        if (completed_count.innerHTML !== "0") {
+            clearComplitedButton.classList.remove("hide")
+        } else {
+            clearComplitedButton.classList.add("hide")
+        }
+    }
 }
-chek_clearList_btn_visibility();
+chek_clearList_btns_visibility();
 
 const myForm = document.getElementById("mainForm");
 
@@ -43,13 +56,15 @@ function createTodo({ id, text, checked }) {
     createTodoForm.children[0].onclick = checkBoxCheck
     myForm.after(createTodoForm);
 
-    let storageTodos = localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : [];
-    const obj = { id: id || storageTodos.length + 1, text, checked };
+    localStorageTodos = localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : [];
+    const obj = { id: id || localStorageTodos.length + 1, text, checked };
 
-    if (!storageTodos.some((item) => item.id === obj.id)) {
-        storageTodos.push(obj);
-        localStorage.setItem("todos", JSON.stringify(storageTodos));
+    if (!localStorageTodos.some((item) => item.id === obj.id)) {
+        localStorageTodos.push(obj);
+        localStorage.setItem("todos", JSON.stringify(localStorageTodos));
     }
+    statusCounter();
+    chek_clearList_btns_visibility();
 }
 
 function renderTodos(todos) {
@@ -58,10 +73,12 @@ function renderTodos(todos) {
     todos.forEach((item) => {
         createTodo(item);
     });
-    chek_clearList_btn_visibility();
+    localStorageTodos = JSON.parse(localStorage.getItem("todos"));
+    chek_clearList_btns_visibility();
 }
 
 myForm.textInput.addEventListener("keydown", function handleKeyDown(event) {
+
     if (event.keyCode === 13) {
         createTodo({ text: event.target.value, checked: false });
         event.target.value = "";
@@ -95,6 +112,9 @@ function checkBoxCheck() {
         localStorageTodos[child_index].checked = false;
     }
     localStorage.setItem("todos", JSON.stringify(localStorageTodos));
-    statusCounter()
+    statusCounter();
+    console.log(555);
+    chek_clearList_btns_visibility();
+
 }
 statusCounter()
