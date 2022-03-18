@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 class="header-h1">todos</h1>
+    <div id="main">
+        <form id="mainForm" action="#" onsubmit="false">
+            <input name="textInput" type="text" id="mainInput" placeholder="What needs to be done?" autocomplete="off">
+            <i class="fas fa-chevron-down" id="selectArrow"></i>
+        </form>
+
+        <div id="bottomMenu" class="hide">
+            <p id="elementsCount"></p>
+
+            <input id=" statusAll " type="radio " name="status " value="All ">
+            <label for="statusAll ">All</label>
+            <p class="all_count ">0</p>
+            <input id="statusActive " type="radio " name="status " value="Active ">
+            <label for="statusActive " for="statusSort ">Active</label>
+            <p class="active_count ">0</p>
+            <input id="statusCompleted " type="radio " name="status " value="Completed ">
+            <label for="statusCompleted " for="statusSort ">Completed</label>
+            <p class="completed_count ">0</p>
+
+            <button id="clearAll" class="hide ">Clear All List</button>
+            <button id="clearComplited" class="hide ">Clear Complited</button>
+        </div>
+    </div>
+
+    <form name="myform " action="#" class="create-todo form-item for-clone hide">
+        <input name="checkbox" type="checkbox">
+        <input name="textInput" type="text" disabled="" value="">
+        <button type="button" class="hide">x</button>
+    </form>
+
+    <script src="main.js "></script>
+</body>
+
+</html>
