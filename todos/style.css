@@ -198,9 +198,6 @@ input[type="checkbox"] {
     border-radius: 50%;
 }
 .buttonEditRow{
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     right: 70px;
     display: none;
     background-color: rgb(146, 140, 140);
@@ -213,10 +210,6 @@ input[type="checkbox"] {
 .buttonEditRow:hover{
     background-color: rgb(62, 100, 0);
     border-radius: 30%;
-}
-.submitPopUp{
-    width: 60px;
-
 }
 
 del::before,
