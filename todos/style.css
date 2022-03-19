@@ -112,27 +112,24 @@ input[type="checkbox"] {
     position: relative;
     box-shadow: 0px 10px 0px -5px #f6f6f6, 0px 10px 0px -4px #c5c5c5, 0px 20px 0px -10px #f6f6f6, 0px 20px 0px -9px #c5c5c5;
 }
-#bottomMenu>input {
-    display: none
-}
 
-#bottomMenu>input:checked {
-    background-color: #af5b5e;
+#bottomMenu>input {
+    display: none;
 }
 
 #bottomMenu>label {
     padding: 5px;
+    margin: 5px;
     cursor: pointer;
 }
 
 #bottomMenu>label:hover {
-    padding: 5px;
     cursor: pointer;
     border: 1px solid rgb(206, 203, 203);
 }
 
-#bottomMenu>input:checked+label {
-    background: rgb(245, 238, 238);
+#bottomMenu>input:checked +label {
+    background-color: rgb(245, 238, 238);
     border: 1px solid rgb(206, 203, 203);
 }
 #activeAmount {
@@ -200,31 +197,10 @@ input[type="checkbox"] {
 
 .buttonDeleteRow:hover{
     background-color: rgb(146, 140, 140);
-    border-radius: 50%;
 }
 
 .buttonEditRow:hover{
     background-color: rgb(146, 140, 140);
-    border-radius: 30%;
-}
-
-del::before,
-del::after {
-    clip-path: inset(100%);
-    clip: rect(1px, 1px, 1px, 1px);
-    height: 1px;
-    overflow: hidden;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
-}
-
-del::before {
-    content: " [deletion start] ";
-}
-
-del::after {
-    content: " [deletion end] ";
 }
 
 #clearAll,

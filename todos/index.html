@@ -13,26 +13,27 @@
     <h1 class="header-h1">todos</h1>
     <div id="main">
         <form id="mainForm" action="#" onsubmit="false">
+            <input name="mainChekBox" type="checkbox"></input>
             <input name="textInput" type="text" id="mainInput" placeholder="What needs to be done?" autocomplete="off">
             <i class="fas fa-chevron-down" id="selectArrow"></i>
         </form>
+     
 
-        <div id="bottomMenu" class="hide">
-            <input id=" statusAll " type="radio " name="status " value="All ">
-            <label for="statusAll ">All</label>
-            <p class="all_count ">0</p>
+    <div id="bottomMenu" class="hide">
+        <input id=" statusAll " type="radio " name="status " value="All ">
+        <label for="statusAll ">All <span class="all_count">0</span></label>
+    
+        <input id="statusActive " type="radio " name="status " value="Active ">
+        <label for="statusActive ">Active <span class="active_count">0</span></label>
 
-            <input id="statusActive " type="radio " name="status " value="Active ">
-            <label for="statusActive " for="statusSort ">Active</label>
-            <p class="active_count ">0</p>
+        <input id="statusCompleted " type="radio " name="status " value="Completed " checked>
+        <label for="statusCompleted " >Completed <span class="completed_count">0</span></label>
 
-            <input id="statusCompleted " type="radio " name="status " value="Completed ">
-            <label for="statusCompleted " for="statusSort ">Completed</label>
-            <p class="completed_count ">0</p>
+        <button id="clearAll" class="hide ">Clear All List</button>
+        <button id="clearComplited" class="hide ">Clear Complited</button>
+    </div>
 
-            <button id="clearAll" class="hide ">Clear All List</button>
-            <button id="clearComplited" class="hide ">Clear Complited</button>
-        </div>
+
     </div>
 
     <form name="myform " action="#" class="create-todo form-item for-clone hide">

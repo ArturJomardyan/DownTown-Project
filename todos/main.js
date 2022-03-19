@@ -147,6 +147,7 @@ function checkBoxCheck() {
 
 }
 
+
 statusCounter()
 
  function deleteRow() {
@@ -186,4 +187,26 @@ function submit_modal(){
 }
 
 
+
+
+// let mainChekBox = document.forms.mainForm.mainChekBox
+// let mainDiv = document.getElementById("main");
+
+// mainChekBox.onclick = function(){
+  
+//     let unchekedCollection = localStorageTodos.filter(el => el.checked === false);
+
+//     if(unchekedCollection.length > 1){
+//         let allChek = [];
+//         allChek  = localStorageTodos.map(el => {
+//            if(el.checked === false){
+//                el.checked = true
+//             }
+//         })
+//     localStorage.setItem("todos", JSON.stringify(allChek));
+//     }
+//     localStorageTodos = JSON.parse(localStorage.getItem("todos")) 
+//     renderTodos(localStorageTodos);
+   
+// }
 
