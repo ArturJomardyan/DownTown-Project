@@ -77,7 +77,7 @@ function createTodo({ id, text, checked }) {
         createTodoForm.children[0].onclick = checkBoxCheck
         createTodoForm.children[1].value = text
         createTodoForm.children[2].onclick = deleteRow
-        // createTodoForm.children[3].onclick = open_modal
+        createTodoForm.children[3].onclick = open_modal
         myForm.after(createTodoForm);
         localStorageTodos = localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : [];
         const obj = { id: id || localStorageTodos.length + 1, text, checked };
@@ -158,10 +158,32 @@ statusCounter()
     renderTodos(localStorageTodos);
 }
 
-// function open_modal() {
-//     document.getElementsByClassName("popup")[0].style.display = 'block'
-//     document.getElementsByClassName("root_form")[0].style.display = 'block'
-// }
+
+let popup = document.forms.modal
+let popupBackground = document.getElementsByClassName("root_form")[0];
+let index_open_row = document.getElementsByClassName("index_open_row")[0];
+
+function open_modal() {
+    let child_index = getTargetIndex(this)
+    popup.textarea.value = localStorageTodos[child_index].text
+
+    index_open_row.innerHTML = child_index
+    popup.style.display = 'block'
+    popupBackground.style.display = 'block'
+    console.log(index_open_row);
+}
+
+function close_modal(){
+    popup.style.display = 'none'
+    popupBackground.style.display = 'none'
+}
+
+function submit_modal(){
+     localStorageTodos[index_open_row.innerHTML].text = popup.textarea.value;
+     localStorage.setItem("todos", JSON.stringify(localStorageTodos));
+     close_modal()
+     renderTodos(localStorageTodos);
+}
 
 
 

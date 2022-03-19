@@ -41,13 +41,14 @@
         <button type="button" class="buttonDeleteRow">X</button>
         <button type="button" class="buttonEditRow">Edit</button>
     </form>
-<!-- 
+
     <div hidden="true" class="root_form"></div>
-    <form hidden="true" onsubmit="false" class="popup">
-        <textarea name="text" cols="30" rows="10"></textarea>
-        <input class="popupBtn" type="submit" onclick="submitFunc()" value="submit">
-        <input class="popupBtn" onclick="close_modal(event)" type="button" value="cancele">
-    </form> -->
+    <form name="modal" hidden="true" class="popup">
+        <textarea name="textarea"></textarea>
+        <button class="submitEdit" onclick="submit_modal()" type="submit" name="submit">Submit</button>
+        <button class="cancelEdit" onclick="close_modal()" name="cancel">Cancel</button>
+        <p hidden="true" class="index_open_row"></p>
+    </form>
 
     <script src="main.js "></script>
 </body>
