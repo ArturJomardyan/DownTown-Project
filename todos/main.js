@@ -1,3 +1,59 @@
+// function set_all(page_all = []){
+//     localStorage.setItem("All", JSON.stringify(page_all));
+// }
+// function set_activ(page_activ = []){
+//     localStorage.setItem("Active", JSON.stringify(page_activ));
+// }
+// function set_complited(page_complited = []){
+//     localStorage.setItem("Complited", JSON.stringify(page_complited));
+// }
+
+// function get_all(){
+//     return localStorage.getItem("All") || [];
+// }
+// function get_activ(){
+//     return localStorage.getItem("Active") || [];
+// }
+// function get_complited(){
+//     return localStorage.getItem("Complited") || [];
+// }
+
+
+
+// let pageCurrentStatus = ""
+
+// function getCurrentStatus(event){
+//     if (event.target.type === "radio") 
+//         currentStatus = event.target.value;
+        
+//         // renderTodosByStatus(); 
+//       }
+// }
+
+// document.forms.statusForm.addEventListener("change", function handleChecked(event) {
+//     if (event.target.type === "radio") {
+//       const value = event.target.value;
+//       setStatus(value);
+//       renderTodosByStatus();
+//     }
+//   });
+
+// function renderTodoItem({ id, text, checked }) {
+//     const forCloneForm = document.querySelector(".create-todo.for-clone");
+//     const createTodoForm = forCloneForm.cloneNode(true);
+  
+//     createTodoForm.dataset.key = id;
+//     createTodoForm.classList.remove("hide");
+//     createTodoForm.classList.remove("for-clone");
+//     createTodoForm.textInput.value = text;
+//     createTodoForm.checkbox.checked = checked;
+//     formContainer.prepend(createTodoForm);
+//   }
+
+
+
+
+
 let localStorageTodos = JSON.parse(localStorage.getItem("todos")) || [];
 
 let all_count = document.getElementsByClassName("all_count")[0];
@@ -18,7 +74,7 @@ statusCounter();
 let clearAllButton = document.getElementById("clearAll")
 let clearComplitedButton = document.getElementById("clearComplited")
 
-clearAllButton.onclick = function() {
+clearAllButton.onclick = function () {
     localStorageTodos.length = 0;
     localStorage.setItem("todos", JSON.stringify(localStorageTodos));
     clearAllButton.classList.add("hide");
@@ -27,18 +83,18 @@ clearAllButton.onclick = function() {
     chek_clearList_btns_visibility();
 }
 
-clearComplitedButton.onclick = function(){
+clearComplitedButton.onclick = function () {
     for (let i = 0; i < localStorageTodos.length; i++) {
-    if(localStorageTodos[i].checked){
-        localStorageTodos.splice(i,1);
-        i--;
+        if (localStorageTodos[i].checked) {
+            localStorageTodos.splice(i, 1);
+            i--;
+        }
     }
-}
-localStorage.setItem("todos", JSON.stringify(localStorageTodos));
-clearComplitedButton.classList.add("hide");
-renderTodos(localStorageTodos);
-statusCounter()
-chek_clearList_btns_visibility();
+    localStorage.setItem("todos", JSON.stringify(localStorageTodos));
+    clearComplitedButton.classList.add("hide");
+    renderTodos(localStorageTodos);
+    statusCounter()
+    chek_clearList_btns_visibility();
 }
 
 function chek_clearList_btns_visibility() {
@@ -113,7 +169,7 @@ renderTodos(localStorageTodos);
 
 
 
-function getTargetIndex(element){
+function getTargetIndex(element) {
     let parent = element.parentElement.parentElement;
     let childCollection = parent.children
     let length = childCollection.length
@@ -147,12 +203,11 @@ function checkBoxCheck() {
 
 }
 
-
 statusCounter()
 
- function deleteRow() {
+function deleteRow() {
     let child_index = getTargetIndex(this)
-    localStorageTodos.splice(child_index,1);
+    localStorageTodos.splice(child_index, 1);
     localStorage.setItem("todos", JSON.stringify(localStorageTodos));
     statusCounter();
     chek_clearList_btns_visibility();
@@ -174,16 +229,16 @@ function open_modal() {
     console.log(index_open_row);
 }
 
-function close_modal(){
+function close_modal() {
     popup.style.display = 'none'
     popupBackground.style.display = 'none'
 }
 
-function submit_modal(){
-     localStorageTodos[index_open_row.innerHTML].text = popup.textarea.value;
-     localStorage.setItem("todos", JSON.stringify(localStorageTodos));
-     close_modal()
-     renderTodos(localStorageTodos);
+function submit_modal() {
+    localStorageTodos[index_open_row.innerHTML].text = popup.textarea.value;
+    localStorage.setItem("todos", JSON.stringify(localStorageTodos));
+    close_modal()
+    renderTodos(localStorageTodos);
 }
 
 
@@ -191,10 +246,9 @@ function submit_modal(){
 let mainChekBox = document.forms.mainForm.mainChekBox
 let mainDiv = document.getElementById("main");
 
-mainChekBox.onclick = function(){
-
+mainChekBox.onclick = function () {
     let resualt = localStorageTodos.some(el => el.checked === false);
-    if(resualt) localStorageTodos.forEach(el => el.checked = true)
+    if (resualt) localStorageTodos.forEach(el => el.checked = true)
     else localStorageTodos.forEach(el => el.checked = false)
     localStorage.setItem("todos", JSON.stringify(localStorageTodos));
     renderTodos(localStorageTodos);
@@ -204,17 +258,17 @@ mainChekBox.onclick = function(){
 let bottomMenu = document.getElementById("bottomMenu");
 bottomMenu.onclick = labelClick
 
-function labelClick(event){
-    
-        if(event.currentTarget.children[0].checked){
-            renderTodos(localStorageTodos);
-        }else if(event.currentTarget.children[2].checked){
-            const activeTodos = localStorageTodos.filter((el) => el.checked === false);
-            renderTodos(activeTodos);
-        }else{
-            const completedTodos = localStorageTodos.filter((el) => el.checked);
-            renderTodos(completedTodos);
-        } 
+function labelClick(event) {
+
+    if (event.currentTarget.children[0].checked) {
+        renderTodos(localStorageTodos);
+    } else if (event.currentTarget.children[2].checked) {
+        const activeTodos = localStorageTodos.filter((el) => el.checked === false);
+        renderTodos(activeTodos);
+    } else {
+        const completedTodos = localStorageTodos.filter((el) => el.checked);
+        renderTodos(completedTodos);
+    }
 
 }
 

@@ -17,16 +17,18 @@
             <label class="mainFormChekBox" for="toggleCheckBox"></label>
             <input name="textInput" type="text" id="mainInput" placeholder="What needs to be done?" autocomplete="off">
         </form>
+
+        <div class="formContainer"></div>
      
 
     <div id="bottomMenu" class="hide">
-        <input id="statusAll" type="radio" name="status">
+        <input id="statusAll" type="radio" name="status" value="All">
         <label for="statusAll">All <span class="all_count">0</span></label>
     
-        <input id="statusActive" type="radio" name="status">
+        <input id="statusActive" type="radio" name="status" value="Activ">
         <label for="statusActive">Active <span class="active_count">0</span></label>
 
-        <input id="statusCompleted" type="radio" name="status">
+        <input id="statusCompleted" type="radio" name="status" value="Completed">
         <label for="statusCompleted" >Completed <span class="completed_count">0</span></label>
 
         <button id="clearAll" class="hide">Clear All List</button>
