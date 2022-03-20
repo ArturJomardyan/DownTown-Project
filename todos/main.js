@@ -7,7 +7,7 @@ let completed_count = document.getElementsByClassName("completed_count")[0];
 function statusCounter() {
     const allTodos = localStorageTodos;
     const activeTodos = localStorageTodos.filter((el) => el.checked === false);
-    const completedTodos = localStorageTodos.filter((el) => el.checked === true);
+    const completedTodos = localStorageTodos.filter((el) => el.checked);
 
     all_count.innerHTML = allTodos.length;
     active_count.innerHTML = activeTodos.length;
@@ -29,7 +29,7 @@ clearAllButton.onclick = function() {
 
 clearComplitedButton.onclick = function(){
     for (let i = 0; i < localStorageTodos.length; i++) {
-    if(localStorageTodos[i].checked === true){
+    if(localStorageTodos[i].checked){
         localStorageTodos.splice(i,1);
         i--;
     }
@@ -188,25 +188,34 @@ function submit_modal(){
 
 
 
+let mainChekBox = document.forms.mainForm.mainChekBox
+let mainDiv = document.getElementById("main");
 
-// let mainChekBox = document.forms.mainForm.mainChekBox
-// let mainDiv = document.getElementById("main");
+mainChekBox.onclick = function(){
 
-// mainChekBox.onclick = function(){
-  
-//     let unchekedCollection = localStorageTodos.filter(el => el.checked === false);
+    let resualt = localStorageTodos.some(el => el.checked === false);
+    if(resualt) localStorageTodos.forEach(el => el.checked = true)
+    else localStorageTodos.forEach(el => el.checked = false)
+    localStorage.setItem("todos", JSON.stringify(localStorageTodos));
+    renderTodos(localStorageTodos);
+}
 
-//     if(unchekedCollection.length > 1){
-//         let allChek = [];
-//         allChek  = localStorageTodos.map(el => {
-//            if(el.checked === false){
-//                el.checked = true
-//             }
-//         })
-//     localStorage.setItem("todos", JSON.stringify(allChek));
-//     }
-//     localStorageTodos = JSON.parse(localStorage.getItem("todos")) 
-//     renderTodos(localStorageTodos);
-   
-// }
+
+let bottomMenu = document.getElementById("bottomMenu");
+bottomMenu.onclick = labelClick
+
+function labelClick(event){
+    
+        if(event.currentTarget.children[0].checked){
+            renderTodos(localStorageTodos);
+        }else if(event.currentTarget.children[2].checked){
+            const activeTodos = localStorageTodos.filter((el) => el.checked === false);
+            renderTodos(activeTodos);
+        }else{
+            const completedTodos = localStorageTodos.filter((el) => el.checked);
+            renderTodos(completedTodos);
+        } 
+
+}
+
 
