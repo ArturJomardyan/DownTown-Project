@@ -32,12 +32,27 @@ body {
     position: relative;
 }
 
-#selectArrow {
-    position: absolute;
-    left: 18px;
-    bottom: 26.5px;
-    color: #e6e6e6;
+#toggleCheckBox{
     display: none;
+}
+
+#toggleCheckBox + label{
+    cursor: pointer;
+    position: absolute;
+    left: -6px;
+    bottom: 22px;
+    transform: rotate(90deg);
+}
+
+#toggleCheckBox + label:before {
+    content: '❯';
+    font-size: 22px;
+    color: #e6e6e6;
+    padding: 10px 27px 10px 27px;
+}
+
+#toggleCheckBox:checked + label:before {
+    color: #737373;
 }
 
 #mainInput {
