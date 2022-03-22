@@ -19,37 +19,39 @@
         </form>
 
         <div class="formContainer"></div>
-     
 
-    <div id="bottomMenu" class="hide">
-        <input id="statusAll" type="radio" name="status" value="All">
-        <label for="statusAll">All <span class="all_count">0</span></label>
-    
-        <input id="statusActive" type="radio" name="status" value="Activ">
-        <label for="statusActive">Active <span class="active_count">0</span></label>
 
-        <input id="statusCompleted" type="radio" name="status" value="Completed">
-        <label for="statusCompleted" >Completed <span class="completed_count">0</span></label>
+        <div id="bottomMenu" class="hide">
+            <form name="statusForm" action="#" onsubmit="false" class="statusForm">
+                <input id="statusAll" type="radio" name="status" value="All">
+                <label for="statusAll">All <span class="all_count">0</span></label>
 
-        <button id="clearAll" class="hide">Clear All List</button>
-        <button id="clearComplited" class="hide">Clear Complited</button>
+                <input id="statusActive" type="radio" name="status" value="Active">
+                <label for="statusActive">Active <span class="active_count">0</span></label>
+
+                <input id="statusCompleted" type="radio" name="status" value="Completed">
+                <label for="statusCompleted">Completed <span class="completed_count">0</span></label>
+            </form>
+
+            <button id="clearAll" class="hide">Clear All List</button>
+            <button id="clearComplited" class="hide">Clear Complited</button>
+        </div>
+
     </div>
 
-    </div>
-
-    <form name="myform " action="#" class="create-todo form-item for-clone hide">
+    <form name="myForm" action="#" class="create-todo form-item for-clone hide">
         <input name="checkbox" type="checkbox">
         <input name="textInput" type="text" disabled="" value="">
-        <button type="button" class="buttonDeleteRow">X</button>
-        <button type="button" class="buttonEditRow">Edit</button>
+        <button type="button" name="rowDeleteBtn" class="rowDeleteBtn">X</button>
+        <button type="button" name="rowEditBtn" class="rowEditBtn">Edit</button>
     </form>
 
-    <div hidden="true" class="root_form"></div>
-    <form name="modal" hidden="true" class="popup">
+    <div id="screenBlocker"></div>
+    <form name="modal" class="popup">
         <textarea name="textarea"></textarea>
-        <button class="submitEdit" onclick="submit_modal()" type="submit" name="submit">Submit</button>
-        <button class="cancelEdit" onclick="close_modal()" name="cancel">Cancel</button>
-        <p hidden="true" class="index_open_row"></p>
+        <button class="submitEdit" type="submit" name="submit">Submit</button>
+        <button class="cancelEdit" name="cancel">Cancel</button>
+        <p name="id_open_row"></p>
     </form>
 
     <script src="main.js "></script>
