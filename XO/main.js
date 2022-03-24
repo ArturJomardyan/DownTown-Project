@@ -20,14 +20,21 @@ const winningConditions = [
     [2, 4, 6]
 ];
 
+function handleCellClick(clickedCellEvent) {
+    const clickedCell = clickedCellEvent.target;
+    const clickedCellIndex = Number(clickedCell.getAttribute('data-cell-index'));
+    if (gameState[clickedCellIndex] !== "" || !gameActive) {
+        return;
+    }
+
+    handleCellPlayed(clickedCell, clickedCellIndex);
+    handleResultValidation();
+    setTimeout(() => RobotPlayer(currentPlayer),500);
+}
+
 function handleCellPlayed(clickedCell, clickedCellIndex) {
     gameState[clickedCellIndex] = currentPlayer;
     clickedCell.innerHTML = currentPlayer;
-}
-
-function handlePlayerChange() {
-    currentPlayer = currentPlayer === "X" ? "O" : "X";
-    statusDisplay.innerHTML = currentPlayerTurn();
 }
 
 function handleResultValidation() {
@@ -73,39 +80,40 @@ function handleResultValidation() {
     handlePlayerChange();
 }
 
-function handleCellClick(clickedCellEvent) {
-    const clickedCell = clickedCellEvent.target;
-    const clickedCellIndex = Number(clickedCell.getAttribute('data-cell-index'));
-    if (gameState[clickedCellIndex] !== "" || !gameActive) {
-        return;
-    }
-
-    handleCellPlayed(clickedCell, clickedCellIndex);
-    handleResultValidation();
-    RobotPlayer(currentPlayer);
+function handlePlayerChange() {
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    statusDisplay.innerHTML = currentPlayerTurn();
 }
+
 
 function handleRestartGame() {
     gameActive = true;
     currentPlayer = "X";
     gameState = ["", "", "", "", "", "", "", "", ""];
     statusDisplay.innerHTML = currentPlayerTurn();
-    document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
+    document.querySelectorAll('.cell').forEach(cell => {
+        cell.innerHTML = "";
+        cell.classList.remove("winCellBackground");
+        statusDisplay.classList.remove("resualt");
+
+    });
 }
 
 function RobotPlayer(currentPlayer) {
     let emptyCellesIndexes = [];
     if (currentPlayer === "O") {
-        gameState.forEach((cell, cellIndex) =>{
-            if(cell === ""){
+        gameState.forEach((cell, cellIndex) => {
+            if (cell === "") {
                 emptyCellesIndexes.push(cellIndex);
             }
         })
-                randomEmptyCell = Math.floor(Math.random() * emptyCellesIndexes.length);
-
+        randomIndex = Math.floor(Math.random() * emptyCellesIndexes.length);
+        let randomEmptyCell = emptyCellesIndexes[randomIndex];
+        let targetCell = document.getElementsByClassName('gameContainer')[0].children[randomEmptyCell]
+        targetCell.innerHTML = "O";
+        handleCellPlayed(targetCell, randomEmptyCell)
     }
-    console.log(emptyCellesIndexes);
-
+    handleResultValidation();
 }
 
 document.getElementsByClassName('gameContainer')[0].addEventListener('click', handleCellClick);
