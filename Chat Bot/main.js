@@ -12,7 +12,6 @@ input.addEventListener("keydown", function handleKeyDown(event) {
     }
 })
 
-
 function send() {
     if(input.value === "")return
     let span = document.createElement("span");
@@ -25,10 +24,22 @@ function send() {
         span.classList.add("spanLeft");
         container.append(img);
         container.append(span);
+        if(mainBlock.lastElementChild?.className === "frinedChat"){
+            span.style['border-top-left-radius'] = '0px';
+            mainBlock.lastElementChild.firstElementChild.remove();
+            mainBlock.lastElementChild.firstElementChild.style.marginLeft = "45px";
+            mainBlock.lastElementChild.firstElementChild.style['border-bottom-left-radius'] = '0px';
+            mainBlock.lastElementChild.style['padding-bottom'] = '0px';
+            container.style['padding-top'] = '0px';
+        }
         mainBlock.append(container);
         input.value = ""
 
     } else {
+        if(mainBlock.lastElementChild){
+            mainBlock.lastElementChild.style['border-bottom-right-radius'] = '0px';
+            span.style['border-top-right-radius'] = '0px';
+        }
         mainBlock.append(span);
         input.value = ""
     }
