@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: rgb(202, 202, 202);
+}
+
+.mainBlock {
+    margin: 0 auto;
+    width: 410px;
+    height: 550px;
+    border-radius: 7px 7px 0 0;
+    background-color: white;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.footer,.header {
+    max-width: 410px;
+    display: flex;
+    margin: 0 auto;
+    border-radius: 0 0 7px 7px;
+    background-color: white;
+}
+
+input {
+    margin: 10px 5px 10px 5px;
+    padding: 8px;
+    border-radius: 20px;
+    background-color: rgb(238, 234, 234);
+    border: none;
+}
+
+input[type="text"] {
+    min-width: 80%;
+    outline: none;
+}
+
+input[type="submit"]:hover {
+    background-color: gray;
+}
+
+span {
+    align-self: flex-end;
+    background-color: rgb(0, 132, 255);
+    width: min-content;
+    border-radius: 20px;
+    padding: 8px;
+    margin: 1px 5px;
+    max-width: 70%;
+    white-space: normal;
+    word-wrap: break-word;
+    color: white;
+}
+
+.spanLeft{
+    align-self: flex-start;
+}
+
+img{
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    border-radius: 50%;
+}
+.frinedChat{
+    display: flex;
+    align-items: center ;
+    background-color: white;
+    padding: 5px;
+}
