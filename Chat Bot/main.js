@@ -26,7 +26,10 @@ function send() {
         container.append(img);
         container.append(span);
         mainBlock.append(container);
+        input.value = ""
+
     } else {
         mainBlock.append(span);
+        input.value = ""
     }
 }
