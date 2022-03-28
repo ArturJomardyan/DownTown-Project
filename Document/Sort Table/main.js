@@ -1,6 +1,6 @@
 let table = document.getElementsByTagName("table")[0];
 let count = 1;
-table.addEventListener("click", function (event) {
+table.rows[0].addEventListener("click", function (event) {
     let index = event.target.cellIndex;
     let sortedRows
     if (count % 2 !== 0) {
