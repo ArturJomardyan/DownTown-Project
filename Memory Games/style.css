@@ -1,0 +1,324 @@
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url('fonts/Regular/BebasNeue-Regular.eot');
+    src: url('fonts/Regular/BebasNeue-Regular.eot?#iefix') format('embedded-opentype'),
+        url('fonts/Regular/BebasNeue-Regular.woff2') format('woff2'),
+        url('fonts/Regular/BebasNeue-Regular.woff') format('woff'),
+        url('fonts/Regular/BebasNeue-Regular.ttf') format('truetype'),
+        url('fonts/Regular/BebasNeue-Regular.svg#BebasNeue-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* font-family: 'Bebas Neue', cursive; */
+/*  font: 15px 'Bebas Neue', cursive; */
+
+
+@font-face {
+    font-family: 'Didact Gothic';
+    src: url('fonts/Regular/DidactGothic-Regular.eot');
+    src: url('fonts/Regular/DidactGothic-Regular.eot?#iefix') format('embedded-opentype'),
+        url('fonts/Regular/DidactGothic-Regular.woff2') format('woff2'),
+        url('fonts/Regular/DidactGothic-Regular.woff') format('woff'),
+        url('fonts/Regular/DidactGothic-Regular.ttf') format('truetype'),
+        url('fonts/Regular/DidactGothic-Regular.svg#DidactGothic-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+/* font-family: 'Didact Gothic', sans-serif; */
+/*  font: 15px 'Didact Gothic', sans-serif; */
+
+@font-face {
+    font-family: 'Staatliches';
+    src: url('fonts/Regular/Staatliches-Regular.eot');
+    src: url('fonts/Regular/Staatliches-Regular.eot?#iefix') format('embedded-opentype'),
+        url('fonts/Regular/Staatliches-Regular.woff2') format('woff2'),
+        url('fonts/Regular/Staatliches-Regular.woff') format('woff'),
+        url('fonts/Regular/Staatliches-Regular.ttf') format('truetype'),
+        url('fonts/Regular/Staatliches-Regular.svg#Staatliches-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* font-family: 'Staatliches', cursive; */
+/*  font: 15px 'Staatliches', cursive; */
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+#main_container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(243, 241, 241);
+    background-size: cover;
+}
+
+
+#container_newGames_and_history {
+    width: 300px;
+    height: 300px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.new_games_btn,
+.record_btn {
+    width: 120px;
+    padding: 10px;
+    border-radius: 3px;
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #008CBA
+}
+
+.new_games_btn {
+    margin-bottom: 6px;
+}
+
+.record_btn {
+    margin-top: 6px;
+}
+
+.new_games_btn:hover,
+.record_btn:hover {
+    background-color: #008CBA;
+    color: white;
+}
+
+.record_list, .record_header {
+    width: 500px;
+    box-shadow: 1px 3px 12px 2px #000000;
+}
+
+.record_list{
+    background-image: url(images/record-background.png);
+    background-size: cover;
+    padding: 25px;
+    height: auto;
+}
+
+.record_header {
+    position: relative;
+    min-height: 70px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.record_text{
+    position: absolute;
+    z-index: 2;
+    font: 42px/2 'Bebas Neue', cursive;
+    font-weight: 800;
+    letter-spacing: 7px;
+    color:white;
+    opacity: 0.8;
+}
+
+table {
+    width: 100%;
+}
+
+tr th:not(:last-child),
+td:not(:last-child) {
+    border-right: 1px solid black;
+}
+
+tr td:not(:last-child) {
+    border-right: 1px solid black;
+}
+
+th, td {
+    letter-spacing: 4px;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    font: 34px/1.6 'Bebas Neue', cursive;
+    font-weight: 500;
+}
+
+td {
+    font: 24px 'Didact Gothic', sans-serif;
+    font-weight: 400;
+}
+
+#container_newGame {
+    width: 500px;
+    height: 300px;
+    background-color: white;
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#container_newGame span {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+#container_newGame input {
+    width: 40%;
+    height: 35px;
+    border: none;
+    border-bottom: 1px solid gray;
+    outline: none;
+    font-size: 24px;
+}
+
+#container_newGame input:focus {
+    width: 100%;
+    transition: 0.7s;
+}
+
+#game_info_and_container {
+    display: flex;
+}
+
+.game_container {
+    position: relative;
+    z-index: 1;
+    width: 770px;
+    height: 770px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border: 1px solid black;
+}
+
+.gameInfo {
+    position: relative;
+    height: 770px;
+    margin-right: 25px;
+    display: flex;
+    flex-direction: column;
+    min-width: 250px;
+    font-size: 24px;
+    letter-spacing: 3px;
+    background-color: #2980b9;
+}
+
+.video-wrapper {
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reset_btn {
+    align-items: center;
+    background-color: rgba(240, 240, 240, 0.26);
+    border: 1px solid #ffffff;
+    border-radius: 16px;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    font-family: Inter, sans-serif;
+    font-size: 18px;
+    justify-content: center;
+    line-height: 28px;
+    max-width: 100%;
+    padding: 14px 22px;
+    text-decoration: none;
+    transition: all .2s;
+    user-select: none;
+    touch-action: manipulation;
+    width: 100%;
+}
+
+.reset_btn:hover {
+    background-color: black;
+    border: 1px solid #ffffff;
+}
+
+.gameInfo_block {
+    position: absolute;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-size: 28px;
+    padding: 15px;
+}
+
+.gameInfo_block * {
+    margin-bottom: 20px;
+}
+
+.forClone {
+    display: none;
+}
+
+
+.flip-card {
+    margin: 15px;
+    background-color: transparent;
+    width: 150px;
+    height: 150px;
+    opacity: 0.6;
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(-180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.flip-card-front {
+    background-color: #2fcbff;
+}
+
+.flip-card-back {
+    background-color: #2980b9;
+    color: white;
+    transform: rotateY(-180deg);
+}
