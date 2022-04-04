@@ -55,7 +55,7 @@
     box-sizing: border-box;
 }
 
-#main_container {
+#container_main {
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -65,7 +65,7 @@
     background-size: cover;
 }
 
-#container_newGames_and_records {
+.container_newGames_and_records {
     position: relative;
     width: 300px;
     height: 300px;
@@ -100,8 +100,8 @@
 
 .record_header,
 .record_list,
-#container_newGame,
-#container_gameOver {
+.container_newGame,
+.container_gameOver {
     animation: animateBg 7s linear infinite;
     background-image: linear-gradient(45deg, #1c6786, #25708c, #3d8a9d, #56a5af, #69b9bb);
     background-size: 400% 100%;
@@ -141,7 +141,8 @@
     bottom: 15px;
 }
 
-#game_info_and_container {
+.container_current_game_info {
+    position: relative;
     display: flex;
 }
 
@@ -157,8 +158,22 @@
     border: 1px solid black;
 }
 
-.gameInfo_block {
+.current_game_popup{
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 2;
+    width: 300px;
+    height: 200px;
+    background-color: rgb(30, 169, 179);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameInfo_block {
+    position: relative;
     color: white;
     display: flex;
     flex-direction: column;
@@ -166,7 +181,7 @@
     padding: 15px;
 }
 
-.reset_btn {
+.reset_btn,.menu_btn {
     align-items: center;
     background-color: rgba(240, 240, 240, 0.26);
     border: 1px solid #ffffff;
@@ -174,20 +189,16 @@
     color: #ffffff;
     cursor: pointer;
     display: flex;
-    font-family: Inter, sans-serif;
-    font-size: 18px;
     justify-content: center;
-    line-height: 28px;
-    max-width: 100%;
     padding: 14px 22px;
-    text-decoration: none;
     transition: all .2s;
-    user-select: none;
-    touch-action: manipulation;
-    width: 100%;
+    font: 18px 'Bebas Neue', cursive;
+    letter-spacing: 4px;
+    width: 80%;
+    margin: auto;
 }
 
-.reset_btn:hover {
+.reset_btn:hover,.menu_btn:hover {
     background-color: black;
     border: 1px solid #ffffff;
 }
@@ -214,7 +225,7 @@
     flex-direction: column;
 }
 
-#container_record_list {
+.container_record_list {
     width: 550px;
 }
 
@@ -264,7 +275,7 @@ th,td {
     padding: 15px;
 }
 
-#container_newGame, #container_gameOver {
+.container_newGame, .container_gameOver {
     position: relative;
     width: 500px;
     height: 300px;
@@ -276,14 +287,14 @@ th,td {
     flex-direction: column;
 }
 
-#container_newGame p {
+.container_newGame p {
     margin: 0 auto;
     margin-bottom: 15px;
     font: 34px 'Bebas Neue', cursive;
     letter-spacing: 2px;
 }
 
-#container_newGame input {
+.container_newGame input {
     width: 40%;
     height: 35px;
     border: none;
@@ -295,17 +306,17 @@ th,td {
     margin: 0 auto;
 }
 
-#container_newGame .start_btn {
+.container_newGame .start_btn {
     right: 10px;
     bottom: 10px;
 }
 
-#container_newGame .menue_btn {
+.container_newGame .menue_btn {
     bottom: 10px;
     right: 120px;
 } 
 
-#container_newGame input:focus {
+.container_newGame input:focus {
     width: 100%;
     transition: 0.7s;
 }
@@ -325,8 +336,6 @@ th,td {
     transition: all .3s;
 }
 
-
-
 .start_btn:hover,
 .menue_btn:hover {
     border: 0px;
@@ -334,7 +343,7 @@ th,td {
     color: white;
 }
 
-#container_gameOver .menue_btn {
+.container_gameOver .menue_btn {
     right: 135px;
 }
 
@@ -390,7 +399,7 @@ th,td {
     justify-content: center;
 }
 
-.forClone {
+.forClone,.hide {
     display: none;
 }
 
