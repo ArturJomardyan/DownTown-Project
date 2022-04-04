@@ -14,34 +14,32 @@
 
 <body>
     <div id="main_container">
-
-        <div style="display: none;" id="container_newGames_and_history">
+        <!-- style="display: none;" -->
+        <div  id="container_newGames_and_history">
             <div class="content">
-                <button class="new_games_btn">New Games</button>
-                <button class="record_btn">Record</button>
+                <button class="new_games_btn">New Game</button>
+                <button class="record_btn">Records</button>
             </div>
         </div>
 
 
-
-        <div style="display: none;"  id="container_record_list">
+        <div id="container_record_list">
 
             <div class="record_header">
                 <p class="record_text">Top 5 Best Resualt</p>
-                <div class="video-wrapper">
-                    <video playsinline autoplay muted loop poster="cake.jpg">
-                        <source src="Animation/record_headerr.mp4" type="video/webm">
-                    </video>
-                </div>
             </div>
 
             <div class="record_list">
-
                 <table>
                     <tr>
                         <th>Name</th>
                         <th>Time</th>
                         <th>ID</th>
+                    </tr>
+                    <tr>
+                        <td>Artur</td>
+                        <td>00:13:36</td>
+                        <td>458967</td>
                     </tr>
                     <tr>
                         <td>Artur</td>
@@ -75,9 +73,11 @@
         </div>
 
 
-        <div style="display: none;" id="container_newGame">
-            <span>Name:</span>
+        <div  id="container_newGame">
+            <p>Name:<span></span></p>
             <input type="text">
+            <button class="start_btn">Start</button>
+            <button class="menue_btn">Menu</button>
         </div>
 
         <div  id="game_info_and_container">
@@ -109,6 +109,16 @@
             </div>
 
         </div>
+
+        <div id="container_gameOver">
+            <p class="container_gameOver_main_text">Game Over</p>
+            <p class="container_gameOver_name_text">Name</p>
+            <p class="container_gameOver_time_text">Time</p>
+            <p class="container_gameOver_message_text">you took second place</p>
+            <button class="start_btn">Restart</button>
+            <button class="menue_btn">Menu</button>
+        </div>
+
 
     </div>
 

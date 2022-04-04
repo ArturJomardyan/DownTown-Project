@@ -59,26 +59,25 @@
 #main_container {
     height: 100vh;
     width: 100vw;
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
-    background-color: rgb(243, 241, 241);
+    align-items: center; */
+    background-color: rgb(113, 195, 209, 0.5);
     background-size: cover;
 }
-
 
 #container_newGames_and_history {
     width: 300px;
     height: 300px;
-    background-color: white;
+    border-radius: 8px;
+    background-color: rgb(255, 255, 255);
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
+    box-shadow: 7px 6px 77px -9px rgba(16, 37, 37, 0.8);
+    animation: animateBg 7s linear infinite;
+    background-image: linear-gradient(45deg, #8acef0, #2ebfdc, #1ba3c5, #8acef0, #2ebfdc);
+    background-size: 400% 100%;
 }
 
 .new_games_btn,
@@ -86,118 +85,53 @@
     width: 120px;
     padding: 10px;
     border-radius: 3px;
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
+    border: 2px solid #096c8d;
     font-family: 'Bebas Neue', cursive;
     font-size: 20px;
     letter-spacing: 2px;
-    color: #008CBA
+    color: #096c8d;
+    background: transparent;
 }
 
 .new_games_btn {
     margin-bottom: 6px;
 }
 
-.record_btn {
-    margin-top: 6px;
+.record_header,
+.record_list,
+#container_newGame,
+#container_gameOver {
+    animation: animateBg 7s linear infinite;
+    background-image: linear-gradient(45deg, #1c6786, #25708c, #3d8a9d, #56a5af, #69b9bb);
+    background-size: 400% 100%;
+    box-shadow: 7px 6px 77px -9px rgba(16, 37, 37, 0.8);
 }
 
-.new_games_btn:hover,
-.record_btn:hover {
-    background-color: #008CBA;
-    color: white;
+@keyframes animateBg {
+    0% {
+        background-position: 100% 0%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
 }
 
-.record_list, .record_header {
+.record_header.record_list {
     width: 500px;
-    box-shadow: 1px 3px 12px 2px #000000;
-}
-
-.record_list{
-    background-image: url(images/record-background.png);
-    background-size: cover;
-    padding: 25px;
-    height: auto;
 }
 
 .record_header {
-    position: relative;
     min-height: 70px;
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
 }
 
-.record_text{
-    position: absolute;
-    z-index: 2;
-    font: 42px/2 'Bebas Neue', cursive;
-    font-weight: 800;
-    letter-spacing: 7px;
-    color:white;
-    opacity: 0.8;
-}
-
-table {
-    width: 100%;
-}
-
-tr th:not(:last-child),
-td:not(:last-child) {
-    border-right: 1px solid black;
-}
-
-tr td:not(:last-child) {
-    border-right: 1px solid black;
-}
-
-th, td {
-    letter-spacing: 4px;
-    padding: 8px;
-    text-align: center;
-}
-
-th {
-    font: 34px/1.6 'Bebas Neue', cursive;
-    font-weight: 500;
-}
-
-td {
-    font: 24px 'Didact Gothic', sans-serif;
-    font-weight: 400;
-}
-
-#container_newGame {
-    width: 500px;
-    height: 300px;
-    background-color: white;
+.record_list {
     padding: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-#container_newGame span {
-    font-size: 24px;
-    margin-bottom: 15px;
-}
-
-#container_newGame input {
-    width: 40%;
-    height: 35px;
-    border: none;
-    border-bottom: 1px solid gray;
-    outline: none;
-    font-size: 24px;
-}
-
-#container_newGame input:focus {
-    width: 100%;
-    transition: 0.7s;
+    height: auto;
 }
 
 #game_info_and_container {
@@ -216,27 +150,13 @@ td {
     border: 1px solid black;
 }
 
-.gameInfo {
-    position: relative;
-    height: 770px;
-    margin-right: 25px;
+.gameInfo_block {
+    position: absolute;
+    color: white;
     display: flex;
     flex-direction: column;
-    min-width: 250px;
-    font-size: 24px;
-    letter-spacing: 3px;
-    background-color: #2980b9;
-}
-
-.video-wrapper {
-    position: absolute;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 28px;
+    padding: 15px;
 }
 
 .reset_btn {
@@ -265,17 +185,194 @@ td {
     border: 1px solid #ffffff;
 }
 
-.gameInfo_block {
-    position: absolute;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    font-size: 28px;
-    padding: 15px;
-}
-
 .gameInfo_block * {
     margin-bottom: 20px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+#container_record_list {
+    width: 550px;
+}
+
+.record_btn {
+    margin-top: 6px;
+}
+
+.new_games_btn:hover,
+.record_btn:hover {
+    background-color: #096c8d;
+    color: white;
+
+}
+
+.record_list span {
+    position: absolute;
+
+}
+
+.record_text {
+    position: absolute;
+    z-index: 2;
+    font: 42px/2 'Bebas Neue', cursive;
+    font-weight: 800;
+    letter-spacing: 7px;
+    color: rgb(0, 0, 0);
+    opacity: 0.7;
+}
+
+table {
+    width: 100%;
+    border-spacing: 15px;
+}
+
+tr th:not(:last-child) {
+    border-right: 1px solid black;
+}
+
+tr td:not(:last-child) {
+    border-right: 1px dashed black;
+}
+
+th, td {
+    letter-spacing: 4px;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    font: 34px/1.6 'Bebas Neue', cursive;
+    font-weight: 500;
+}
+
+td {
+    font: 24px 'Didact Gothic', sans-serif;
+    font-weight: 400;
+}
+
+#container_newGame, #container_gameOver {
+    position: relative;
+    width: 500px;
+    height: 300px;
+    background-color: white;
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#container_newGame p {
+    margin-bottom: 15px;
+    font: 34px 'Bebas Neue', cursive;
+    letter-spacing: 2px;
+}
+
+#container_newGame input {
+    width: 40%;
+    height: 35px;
+    border: none;
+    border-bottom: 1px solid rgb(0, 0, 0);
+    outline: none;
+    letter-spacing: 2px;
+    font: 28px 'Didact Gothic', sans-serif;
+    background: rgba(0, 0, 0, 0);
+}
+
+#container_newGame input:focus {
+    width: 100%;
+    transition: 0.7s;
+}
+
+.start_btn, .menue_btn {
+    position: absolute;
+    background-color: transparent;
+    min-width: 100px;
+    height: 38px;
+    border: 2px solid #000;
+    color: #000;
+    cursor: pointer;
+    font: 20px 'Bebas Neue', cursive;
+    letter-spacing: 4px;
+    padding: 0 17px;
+    text-align: center;
+    transition: all .3s;
+}
+
+.start_btn {
+    right: 10px;
+    bottom: 10px;
+}
+
+.menue_btn {
+    bottom: 10px;
+    right: 120px;
+}
+
+.start_btn:hover,
+.menue_btn:hover {
+    border: 0px;
+    background-color: #000;
+    color: white;
+}
+
+#container_gameOver .menue_btn {
+    right: 135px;
+}
+
+.container_gameOver_main_text {
+    position: absolute;
+    top: 20px;
+    font: 50px 'Bebas Neue', cursive;
+    letter-spacing: 4px;
+}
+
+.container_gameOver_name_text {
+    position: absolute;
+    top: 90px;
+    font: 30px 'Didact Gothic', sans-serif;
+    letter-spacing: 3px;
+}
+
+.container_gameOver_time_text {
+    position: absolute;
+    top: 140px;
+    font: 30px 'Didact Gothic', sans-serif;
+    letter-spacing: 4px;
+}
+
+.container_gameOver_message_text {
+    position: absolute;
+    bottom: 70px;
+    font: 30px 'Didact Gothic', sans-serif;
+    letter-spacing: 4px;
+    font-weight: 500;
+}
+
+.gameInfo {
+    position: relative;
+    height: 770px;
+    margin-right: 25px;
+    display: flex;
+    flex-direction: column;
+    min-width: 250px;
+    font-size: 24px;
+    letter-spacing: 3px;
+    background-color: #2980b9;
+}
+
+.video-wrapper {
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .forClone {
