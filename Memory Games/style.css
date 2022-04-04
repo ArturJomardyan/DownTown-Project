@@ -55,7 +55,6 @@
     box-sizing: border-box;
 }
 
-
 #main_container {
     height: 100vh;
     width: 100vw;
@@ -225,32 +224,22 @@
 }
 
 table {
-    width: 100%;
+    padding: 20px;
     border-spacing: 15px;
-}
-
-tr th:not(:last-child) {
-    border-right: 1px solid black;
-}
-
-tr td:not(:last-child) {
-    border-right: 1px dashed black;
-}
-
-th, td {
-    letter-spacing: 4px;
-    padding: 8px;
-    text-align: center;
-}
-
-th {
-    font: 34px/1.6 'Bebas Neue', cursive;
-    font-weight: 500;
 }
 
 td {
     font: 24px 'Didact Gothic', sans-serif;
-    font-weight: 400;
+}
+
+th{
+    font: 34px/1.6 'Bebas Neue', cursive;
+}
+
+th,td {
+    text-align: center;
+    letter-spacing: 4px;
+    padding: 15px;
 }
 
 #container_newGame, #container_gameOver {
