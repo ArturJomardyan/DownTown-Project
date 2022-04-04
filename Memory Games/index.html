@@ -88,7 +88,7 @@
 
         <div class="hide container_current_game_info">
             <!--  make container not clickable when popup is open -->
-            <div class="container_blocked"></div>
+            <div class="hide popup_background_blocker"></div>
 
 
            
@@ -102,8 +102,8 @@
                 </div>
 
                 <div class="gameInfo_block">
-                    <span>Time:</span>
-                    <span>Name:</span>
+                    <span>Time</span>
+                    <span>Name</span>
                     <button class="reset_btn">Restart</button>
                     <button class="menu_btn">Menu</button>
 
@@ -111,15 +111,15 @@
 
             </div>
 
+            <div class="hide current_game_popup">
+
+                <p class="popup_message">Do you want to restart the game ?</p>
+
+                <button class="popup_yes_btn">Yes</button>
+                <button class="popup_cancel_btn">Cancel</button>
+            </div>
+
             <div class="game_container">
-
-                <div class=" current_game_popup">
-
-                    <p>You want restart the game ?</p>
-    
-                    <button class="popup_yes_btn">Yes</button>
-                    <button class="popup_cancel_btn">Cancel</button>
-                </div>
 
                 <div class="video-wrapper">
                     <video playsinline autoplay muted loop poster="cake.jpg">
