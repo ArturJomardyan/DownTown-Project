@@ -65,7 +65,8 @@
     background-size: cover;
 }
 
-#container_newGames_and_history {
+#container_newGames_and_records {
+    position: relative;
     width: 300px;
     height: 300px;
     border-radius: 8px;
@@ -89,6 +90,7 @@
     font-size: 20px;
     letter-spacing: 2px;
     color: #096c8d;
+    cursor: pointer;
     background: transparent;
 }
 
@@ -129,8 +131,14 @@
 }
 
 .record_list {
+    position: relative;
     padding: 25px;
     height: auto;
+}
+
+.record_list .menue_btn{
+    right: 15px;
+    bottom: 15px;
 }
 
 #game_info_and_container {
@@ -189,6 +197,19 @@
 }
 
 .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+}
+
+.container_newGame_content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
 }
@@ -224,8 +245,9 @@
 }
 
 table {
-    padding: 20px;
+    padding: 0 10px 10px 10px;
     border-spacing: 15px;
+    margin: 0 auto;
 }
 
 td {
@@ -255,6 +277,7 @@ th,td {
 }
 
 #container_newGame p {
+    margin: 0 auto;
     margin-bottom: 15px;
     font: 34px 'Bebas Neue', cursive;
     letter-spacing: 2px;
@@ -269,7 +292,18 @@ th,td {
     letter-spacing: 2px;
     font: 28px 'Didact Gothic', sans-serif;
     background: rgba(0, 0, 0, 0);
+    margin: 0 auto;
 }
+
+#container_newGame .start_btn {
+    right: 10px;
+    bottom: 10px;
+}
+
+#container_newGame .menue_btn {
+    bottom: 10px;
+    right: 120px;
+} 
 
 #container_newGame input:focus {
     width: 100%;
@@ -291,15 +325,7 @@ th,td {
     transition: all .3s;
 }
 
-.start_btn {
-    right: 10px;
-    bottom: 10px;
-}
 
-.menue_btn {
-    bottom: 10px;
-    right: 120px;
-}
 
 .start_btn:hover,
 .menue_btn:hover {
