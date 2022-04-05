@@ -48,6 +48,21 @@
 /* font-family: 'Staatliches', cursive; */
 /*  font: 15px 'Staatliches', cursive; */
 
+@font-face {
+    font-family: 'digital';
+    src: url('fonts/Normal/Digital-7Italic.eot');
+    src: url('fonts/Normal/Digital-7Italic.eot?#iefix') format('embedded-opentype'),
+        url('fonts/Normal/Digital-7Italic.woff2') format('woff2'),
+        url('fonts/Normal/Digital-7Italic.woff') format('woff'),
+        url('fonts/Normal/Digital-7Italic.ttf') format('truetype'),
+        url('fonts/Normal/Digital-7Italic.svg#Staatliches-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/*  font: 24px 'digital', cursive; */
+
 
 * {
     padding: 0;
@@ -136,7 +151,7 @@
     height: auto;
 }
 
-.record_list .menue_btn{
+.record_list .menue_btn {
     right: 15px;
     bottom: 15px;
 }
@@ -158,7 +173,7 @@
     border: 1px solid black;
 }
 
-.popup_background_blocker{
+.popup_background_blocker {
     position: absolute;
     background-color: black;
     opacity: 0.1;
@@ -167,11 +182,11 @@
     width: 100%;
 }
 
-.current_game_popup{
+.current_game_popup {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     z-index: 9;
     padding: 15px;
     width: 330px;
@@ -180,7 +195,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font: 24px 'Staatliches', cursive;
+    font: 24px 'Didact Gothic', sans-serif;
     letter-spacing: 4px;
     text-align: center;
 }
@@ -193,13 +208,37 @@
     font-size: 28px;
     padding: 15px;
     text-align: center;
+    word-break: break-word;
 }
 
-.currentGameTime, .currentPlayerName{
-    margin-bottom: 25px;
+.time {
+    font: 40px 'digital', cursive;
 }
 
-.reset_btn,.menu_btn {
+.player {
+    font: 34px 'Didact Gothic', sans-serif;
+}
+
+.time,
+.player {
+    letter-spacing: 10px;
+    margin-bottom: 15px;
+}
+
+.popup_message {
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.currentGameTime,
+.currentPlayerName {
+    margin-bottom: 10px;
+    font: 30px 'Bebas Neue', cursive;
+    letter-spacing: 4px;
+}
+
+.reset_btn,
+.menu_btn {
     align-items: center;
     background-color: rgba(240, 240, 240, 0.26);
     border: 1px solid #ffffff;
@@ -216,13 +255,10 @@
     margin: 10px auto;
 }
 
-.reset_btn:hover,.menu_btn:hover {
+.reset_btn:hover,
+.menu_btn:hover {
     background-color: black;
     border: 1px solid #ffffff;
-}
-
-.gameInfo_block * :not(:nth-child(3)) {
-    margin-bottom: 50pxpx;
 }
 
 .content {
@@ -234,7 +270,7 @@
     flex-direction: column;
 }
 
-.container_newGame_content{
+.container_newGame_content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -283,17 +319,19 @@ td {
     font: 24px 'Didact Gothic', sans-serif;
 }
 
-th{
+th {
     font: 34px/1.6 'Bebas Neue', cursive;
 }
 
-th,td {
+th,
+td {
     text-align: center;
     letter-spacing: 4px;
     padding: 15px;
 }
 
-.container_name, .container_endGame {
+.container_name,
+.container_endGame {
     position: relative;
     width: 500px;
     height: 300px;
@@ -332,7 +370,7 @@ th,td {
 .container_name .menue_btn {
     bottom: 10px;
     right: 120px;
-} 
+}
 
 .container_name input:focus {
     width: 100%;
@@ -357,12 +395,12 @@ th,td {
     transition: all .3s;
 }
 
-.popup_yes_btn{
+.popup_yes_btn {
     bottom: 15px;
     right: 50px;
 }
 
-.popup_cancel_btn{
+.popup_cancel_btn {
     bottom: 15px;
     left: 50px;
 }
@@ -370,7 +408,7 @@ th,td {
 .start_btn:hover,
 .menue_btn:hover,
 .popup_yes_btn:hover,
-.popup_cancel_btn:hover{
+.popup_cancel_btn:hover {
     border: 0px;
     background-color: #000;
     color: white;
@@ -412,10 +450,11 @@ th,td {
 .gameInfo {
     position: relative;
     height: 770px;
+    width: 270px;
     margin-right: 25px;
     display: flex;
     flex-direction: column;
-    min-width: 250px;
+    flex-wrap: wrap;
     font-size: 24px;
     letter-spacing: 3px;
     background-color: #2980b9;
@@ -432,7 +471,8 @@ th,td {
     justify-content: center;
 }
 
-.forClone,.hide {
+.forClone,
+.hide {
     display: none;
 }
 
@@ -477,4 +517,3 @@ th,td {
     background-repeat: no-repeat;
     background-position: center;
 }
-
