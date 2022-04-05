@@ -15,14 +15,14 @@
 <body>
     <div id="container_main">
 
-        <div class="container_newGames_and_records">
+        <div class="hide container_start">
             <div class="content">
                 <button class="new_games_btn">New Game</button>
                 <button class="record_btn">Records</button>
             </div>
         </div>
 
-        <div class="hide container_record_list">
+        <div class="hide container_records">
 
             <div class="record_header">
                 <p class="record_text">Top 5 Best Resualt</p>
@@ -75,7 +75,7 @@
         </div>
 
 
-        <div class="hide container_newGame">
+        <div class="hide container_name">
 
             <div class="container_newGame_content">
                 <p>Name:<span></span></p>
@@ -86,24 +86,21 @@
             <button class="menue_btn">Menu</button>
         </div>
 
-        <div class="hide container_current_game_info">
+        <div class="hide container_game">
             <!--  make container not clickable when popup is open -->
             <div class="hide popup_background_blocker"></div>
-
-
-           
 
             <div class="gameInfo">
 
                 <div class="video-wrapper">
-                    <video playsinline autoplay muted loop poster="cake.jpg">
+                    <video playsinline autoplay muted loop>
                         <source src="Animation/GameBackground.mp4" type="video/webm">
                     </video>
                 </div>
 
                 <div class="gameInfo_block">
-                    <span>Time</span>
-                    <span>Name</span>
+                    <span class="currentGameTime">Time</span>
+                    <span class="currentPlayerName">Name</span>
                     <button class="reset_btn">Restart</button>
                     <button class="menu_btn">Menu</button>
 
@@ -111,7 +108,7 @@
 
             </div>
 
-            <div class="hide current_game_popup">
+            <div data-openBtnName="" class="hide current_game_popup">
 
                 <p class="popup_message">Do you want to restart the game ?</p>
 
@@ -122,7 +119,7 @@
             <div class="game_container">
 
                 <div class="video-wrapper">
-                    <video playsinline autoplay muted loop poster="cake.jpg">
+                    <video playsinline autoplay muted loop>
                         <source src="Animation/GameBackground.mp4" type="video/webm">
                     </video>
                 </div>
@@ -131,7 +128,7 @@
 
         </div>
 
-        <div class="hide container_gameOver ">
+        <div class="hide container_endGame">
             <p class="container_gameOver_main_text">Game Over</p>
             <p class="container_gameOver_name_text">Name</p>
             <p class="container_gameOver_time_text">Time</p>
@@ -143,7 +140,7 @@
 
     </div>
 
-    <div class="flip-card forClone">
+    <div class="flip-card forClone hide">
         <div class="flip-card-inner">
             <div class="flip-card-front"></div>
             <div class="flip-card-back"></div>

@@ -65,7 +65,7 @@
     background-size: cover;
 }
 
-.container_newGames_and_records {
+.container_start {
     position: relative;
     width: 300px;
     height: 300px;
@@ -100,8 +100,8 @@
 
 .record_header,
 .record_list,
-.container_newGame,
-.container_gameOver {
+.container_name,
+.container_endGame {
     animation: animateBg 7s linear infinite;
     background-image: linear-gradient(45deg, #1c6786, #25708c, #3d8a9d, #56a5af, #69b9bb);
     background-size: 400% 100%;
@@ -141,7 +141,7 @@
     bottom: 15px;
 }
 
-.container_current_game_info {
+.container_game {
     position: relative;
     display: flex;
 }
@@ -195,6 +195,10 @@
     text-align: center;
 }
 
+.currentGameTime, .currentPlayerName{
+    margin-bottom: 25px;
+}
+
 .reset_btn,.menu_btn {
     align-items: center;
     background-color: rgba(240, 240, 240, 0.26);
@@ -209,7 +213,7 @@
     font: 18px 'Bebas Neue', cursive;
     letter-spacing: 4px;
     width: 80%;
-    margin: auto;
+    margin: 10px auto;
 }
 
 .reset_btn:hover,.menu_btn:hover {
@@ -239,7 +243,7 @@
     flex-direction: column;
 }
 
-.container_record_list {
+.container_records {
     width: 550px;
 }
 
@@ -289,7 +293,7 @@ th,td {
     padding: 15px;
 }
 
-.container_newGame, .container_gameOver {
+.container_name, .container_endGame {
     position: relative;
     width: 500px;
     height: 300px;
@@ -301,14 +305,14 @@ th,td {
     flex-direction: column;
 }
 
-.container_newGame p {
+.container_name p {
     margin: 0 auto;
     margin-bottom: 15px;
     font: 34px 'Bebas Neue', cursive;
     letter-spacing: 2px;
 }
 
-.container_newGame input {
+.container_name input {
     width: 40%;
     height: 35px;
     border: none;
@@ -320,17 +324,17 @@ th,td {
     margin: 0 auto;
 }
 
-.container_newGame .start_btn {
+.container_name .start_btn {
     right: 10px;
     bottom: 10px;
 }
 
-.container_newGame .menue_btn {
+.container_name .menue_btn {
     bottom: 10px;
     right: 120px;
 } 
 
-.container_newGame input:focus {
+.container_name input:focus {
     width: 100%;
     transition: 0.7s;
 }
@@ -372,7 +376,7 @@ th,td {
     color: white;
 }
 
-.container_gameOver .menue_btn {
+.container_endGame .menue_btn {
     right: 135px;
 }
 
@@ -469,6 +473,8 @@ th,td {
 
 .flip-card-back {
     background-color: #2980b9;
-    color: white;
     transform: rotateY(-180deg);
+    background-repeat: no-repeat;
+    background-position: center;
 }
+
