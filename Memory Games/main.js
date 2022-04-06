@@ -15,7 +15,8 @@ let popup_background_blocker = document.querySelector(".popup_background_blocker
 let menue_btn = document.querySelector(".menue_btn");
 let popup_cancel_btn = document.querySelector(".popup_cancel_btn");
 let currentPlayerName = document.querySelector(".currentPlayerName");
-// let flip_card_inner = document.querySelector(".flip-card-inner");
+let gameName = document.querySelector(".gameName");
+// let flip_card = document.querySelector(".flip-card");
 let player = document.querySelector(".player");
 let houre = document.querySelector(".hh");
 let minute = document.querySelector(".mm");
@@ -82,10 +83,11 @@ function startGame() {
       gameContainer_block.classList.remove("hide");
       let imgIndex = getRandomNum();
       gameContainer_block.children[0].children[1].style.backgroundImage = `url('images/img_${imgIndex}.png')`;
+      gameContainer_block.dataset.id = imgIndex;
       gameContainer.append(gameContainer_block);
    }
 }
-
+startGame()
 container_start.addEventListener("click", function (event) {
    if (event.target.innerText === "New Game") {
       setStatus("container_name")
@@ -94,12 +96,18 @@ container_start.addEventListener("click", function (event) {
    }
    if (event.target.innerText === "Records") {
       setStatus("container_records");
-      debugger;
       renderByStatus("container_start");
    }
 });
 
 newGame_input.setAttribute("maxlength", "15");
+
+// delete validation message if it`s exist
+newGame_input.addEventListener("input", function () {
+   if (this.length !== 0) {
+      this.nextElementSibling?.remove()
+   }
+})
 
 container_name.addEventListener("click", function (event) {
    if (event.target.innerText === "Menu") {
@@ -109,11 +117,15 @@ container_name.addEventListener("click", function (event) {
       return;
    }
    if (event.target.innerText === "Start") {
-      if(newGame_input.value === ""){
-         const span = document.createElement("span");
-         span.classList.add("validationMessage")
-         newGame_input.insertAdjacentText("afterend","sasasas")
-      }else{
+      if (newGame_input.value === "") {
+         // check if exist validation message or not yet
+         if (this.children[0].children.length !== 3) {
+            let message = "Please Enter The Name"
+            let where = "afterend"
+            let elem = `<span class="validationMessage">${message}</span>`
+            newGame_input.insertAdjacentHTML(where, elem);
+         };
+      } else {
          player.innerText = newGame_input.value
          newGame_input.value = "";
          popup_cancel_btn.innerText = "Back";
@@ -148,8 +160,24 @@ gameInfo.addEventListener("click", function (event) {
    }
 })
 
-container_game.addEventListener("click", function (event) {
 
+let arrImageCheck = [];
+let openedCouple = 0
+container_game.addEventListener("click", function (event) {
+   if (event.target.className.includes("flip-card-front")) {
+      event.target.parentElement.style.transform = "rotateY(-180deg)";
+      event.target.parentElement.parentElement.style.transform = "rotateY(-180deg)";
+      let blockID = event.target.parentElement.parentElement.dataset.id;
+      arrImageCheck.push(blockID);
+      console.log(arrImageCheck);
+      if (arrImageCheck.length === 2) {
+         if (arrImageCheck[0] !== arrImageCheck[1]) {
+            for (const item in gameContainer.children) {
+               console.log(item.dataset);
+            }
+         }
+      }
+   }
 })
 
 current_game_popup.addEventListener("click", function (event) {
@@ -189,7 +217,11 @@ current_game_popup.addEventListener("click", function (event) {
       hide(event.currentTarget, popup_background_blocker);
    }
 
-})
+   //for test
+   if (event.target.innerText === "Yes" || event.target.innerText === "Cancel") {
+      hide(event.currentTarget, popup_background_blocker);
+   }
+});
 
 var hr = 0;
 var min = 0;

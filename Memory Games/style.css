@@ -1,3 +1,5 @@
+
+
 @font-face {
     font-family: 'Bebas Neue';
     src: url('fonts/Regular/BebasNeue-Regular.eot');
@@ -49,20 +51,19 @@
 /*  font: 15px 'Staatliches', cursive; */
 
 @font-face {
-    font-family: 'digital';
-    src: url('fonts/Normal/Digital-7Italic.eot');
-    src: url('fonts/Normal/Digital-7Italic.eot?#iefix') format('embedded-opentype'),
-        url('fonts/Normal/Digital-7Italic.woff2') format('woff2'),
-        url('fonts/Normal/Digital-7Italic.woff') format('woff'),
-        url('fonts/Normal/Digital-7Italic.ttf') format('truetype'),
-        url('fonts/Normal/Digital-7Italic.svg#Staatliches-Regular') format('svg');
+    font-family: 'Digital Numbers';
+    src: url('fonts/Regular/DigitalNumbers-Regular.eot');
+    src: url('fonts/Regular/DigitalNumbers-Regular.eot?#iefix') format('embedded-opentype'),
+        url('fonts/Regular/DigitalNumbers-Regular.woff2') format('woff2'),
+        url('fonts/Regular/DigitalNumbers-Regular.woff') format('woff'),
+        url('fonts/Regular/DigitalNumbers-Regular.ttf') format('truetype'),
+        url('fonts/Regular/DigitalNumbers-Regular.svg#DigitalNumbers-Regular') format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 
-/*  font: 24px 'digital', cursive; */
-
+/*  font: 24px 'Digital Numbers', cursive; */
 
 * {
     padding: 0;
@@ -70,14 +71,20 @@
     box-sizing: border-box;
 }
 
-#container_main {
+#container_main{
     height: 100vh;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: rgb(113, 195, 209, 0.5);
-    background-size: cover;
+}
+
+.gameName {
+    font: 120px 'Rubik Microbe', cursive;
+    letter-spacing: 20px;
+    position: absolute;
+    top: 35px;
 }
 
 .container_start {
@@ -212,7 +219,7 @@
 }
 
 .time {
-    font: 40px 'digital', cursive;
+    font: 24px 'Digital Numbers', cursive;
 }
 
 .player {
@@ -228,6 +235,13 @@
 .popup_message {
     text-align: center;
     word-wrap: break-word;
+}
+
+.validationMessage {
+    font-size: 16px;
+    color: red;
+    text-align: center;
+    margin-top: 10px;
 }
 
 .currentGameTime,
@@ -484,6 +498,7 @@ td {
     height: 150px;
     opacity: 0.6;
     perspective: 1000px;
+    cursor: pointer;
 }
 
 .flip-card-inner {
@@ -493,10 +508,6 @@ td {
     transition: 0.6s;
     transform-style: preserve-3d;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
-
-.flip-card:hover .flip-card-inner {
-    transform: rotateY(-180deg);
 }
 
 .flip-card-front,
