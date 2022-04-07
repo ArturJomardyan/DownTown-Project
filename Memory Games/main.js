@@ -5,6 +5,7 @@ let container_records = document.querySelector(".container_records");
 let container_game = document.querySelector(".container_game");
 let container_endGame = document.querySelector(".container_endGame");
 
+let table = document.querySelector("table");
 let gameContainer = document.querySelector(".game_container");
 let cloneCard = document.querySelector(".forClone");
 let newGame_input = document.querySelector(".newGame_input");
@@ -28,6 +29,101 @@ function setStatus(status = "") {
 
 function getStatus() {
    return localStorage.getItem("currentPage") || "container_start";
+}
+
+function setRecordsList(arr = []) {
+   localStorage.setItem("Records List", JSON.stringify(arr));
+}
+
+function getRecordsList() {
+   return JSON.parse(localStorage.getItem("Records List")) || [];
+}
+
+function setCurrentGameInfo(obj = {}) {
+   localStorage.setItem("Current Game Info", JSON.stringify(obj));
+}
+
+function getCurrentGameInfo() {
+   return JSON.parse(localStorage.getItem("Current Game Info")) || {};
+}
+
+
+var hr = 0;
+var min = 0;
+var sec = 0;
+
+let stoptime = true;
+
+
+function timerCycle() {
+
+   stoptime = false;
+
+   if (!stoptime) {
+      sec = Number(sec);
+      min = Number(min);
+      hr = Number(hr);
+
+      sec = sec + 1;
+
+      if (sec == 60) {
+         min = min + 1;
+         sec = 0;
+      }
+      if (min == 60) {
+         hr = hr + 1;
+         min = 0;
+         sec = 0;
+      }
+      if (sec < 10 || sec == 0) {
+         sec = '0' + sec;
+         second.innerHTML = sec
+      }
+      second.innerHTML = sec
+
+      if (min < 10 || min == 0) {
+         min = '0' + min;
+         minute.innerHTML = min
+      }
+      minute.innerHTML = min
+
+      if (hr < 10 || hr == 0) {
+         hr = '0' + hr;
+         houre.innerHTML = hr
+      }
+      houre.innerHTML = hr
+
+      setTimeout("timerCycle()", 1000);
+   }
+
+}
+
+function resetTimer() {
+   stoptime = true;
+   houre.innerText = "00"
+   minute.innerText = "00"
+   second.innerText = "00"
+   hr = 0;
+   sec = 0;
+   min = 0;
+}
+
+function drawRecordsList() {
+   let list = getRecordsList();
+   console.log(list);
+   if (list.length === 0) {
+      let row = `<tr><td colspan="3">no results yet</td></tr>`
+      table.tBodies[0].insertAdjacentHTML("beforeend", row);
+   } else {
+      list.forEach(el => {
+         let row = `<tr>
+         <td>${el.name}</td>
+         <td>${el.time}</td>
+         <td>${el.id}</td>
+       </td>`
+         table.tBodies[0].insertAdjacentHTML("beforeend", row);
+      })
+   }
 }
 
 let hide = (...elem) => elem.forEach(el => el.classList.add("hide"))
@@ -75,29 +171,39 @@ function getRandomNum() {
 }
 
 function startGame() {
+   debugger;
    popup_message.innerText = "Are You Ready ?"
    setTimeout(() => show(popup_background_blocker, current_game_popup), 300);
+
+   let current_game_info = getCurrentGameInfo()
+   current_game_info["playerInfo"] = {
+      name: player.innerText,
+      time: +new Date(), // for get current duration game when relod page
+      id: String(+new Date()).substring(0, 6) // just generate random 6 digit game id 
+   };
    for (let i = 0; i < 16; i++) {
       let gameContainer_block = cloneCard.cloneNode(true);
       gameContainer_block.classList.remove("forClone");
       gameContainer_block.classList.remove("hide");
-      let imgIndex = getRandomNum();
-      gameContainer_block.children[0].children[1].style.backgroundImage = `url('images/img_${imgIndex}.png')`;
-      gameContainer_block.dataset.id = imgIndex;
       gameContainer.append(gameContainer_block);
+
+      let imgIndex = getRandomNum();
+      current_game_info[i] = imgIndex;
    }
+   setCurrentGameInfo(current_game_info);
 }
-startGame()
+
 container_start.addEventListener("click", function (event) {
    if (event.target.innerText === "New Game") {
       setStatus("container_name")
       renderByStatus("container_start")
       return;
-   }
+   };
    if (event.target.innerText === "Records") {
+      drawRecordsList();
       setStatus("container_records");
       renderByStatus("container_start");
-   }
+   };
 });
 
 newGame_input.setAttribute("maxlength", "15");
@@ -165,8 +271,8 @@ let arrImageCheck = [];
 let openedCouple = 0
 container_game.addEventListener("click", function (event) {
    if (event.target.className.includes("flip-card-front")) {
-      event.target.parentElement.style.transform = "rotateY(-180deg)";
-      event.target.parentElement.parentElement.style.transform = "rotateY(-180deg)";
+      event.target.parentElement.style.transform = "rotateY(180deg)";
+      event.target.parentElement.parentElement.style.transform = "rotateY(180deg)";
       let blockID = event.target.parentElement.parentElement.dataset.id;
       arrImageCheck.push(blockID);
       console.log(arrImageCheck);
@@ -184,7 +290,7 @@ current_game_popup.addEventListener("click", function (event) {
 
    if (event.target.innerText === "Yes" && current_game_popup.dataset.openBtnName === "Start") {
       hide(event.currentTarget, popup_background_blocker);
-      timerCycle()
+      timerCycle();
       return;
    }
 
@@ -208,6 +314,8 @@ current_game_popup.addEventListener("click", function (event) {
 
    if (event.target.innerText === "Yes" && current_game_popup.dataset.openBtnName === "Menu") {
       hide(event.currentTarget, popup_background_blocker);
+      debugger;
+      resetTimer();
       setStatus("container_start");
       renderByStatus("container_game");
       return;
@@ -216,70 +324,7 @@ current_game_popup.addEventListener("click", function (event) {
    if (event.target.innerText === "Cancel" && current_game_popup.dataset.openBtnName === "Menu") {
       hide(event.currentTarget, popup_background_blocker);
    }
-
-   //for test
-   if (event.target.innerText === "Yes" || event.target.innerText === "Cancel") {
-      hide(event.currentTarget, popup_background_blocker);
-   }
 });
 
-var hr = 0;
-var min = 0;
-var sec = 0;
 
-let stoptime = true;
-
-
-function timerCycle() {
-
-   stoptime = false;
-
-   if (!stoptime) {
-      sec = Number(sec);
-      min = Number(min);
-      hr = Number(hr);
-
-      sec = sec + 1;
-
-      if (sec == 60) {
-         min = min + 1;
-         sec = 0;
-      }
-      if (min == 60) {
-         hr = hr + 1;
-         min = 0;
-         sec = 0;
-      }
-      if (sec < 10 || sec == 0) {
-         sec = '0' + sec;
-         second.innerHTML = sec
-      }
-      second.innerHTML = sec
-
-      if (min < 10 || min == 0) {
-         min = '0' + min;
-         minute.innerHTML = min
-      }
-      minute.innerHTML = min
-
-      if (hr < 10 || hr == 0) {
-         hr = '0' + hr;
-         houre.innerHTML = hr
-      }
-      houre.innerHTML = hr
-
-      setTimeout("timerCycle()", 1000);
-   }
-
-}
-
-function resetTimer() {
-   stoptime = true;
-   houre.innerText = "00"
-   minute.innerText = "00"
-   second.innerText = "00"
-   hr = 0;
-   sec = 0;
-   min = 0;
-}
 
