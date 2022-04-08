@@ -171,24 +171,29 @@ function getRandomNum() {
 }
 
 function startGame() {
-   debugger;
    popup_message.innerText = "Are You Ready ?"
-   setTimeout(() => show(popup_background_blocker, current_game_popup), 300);
+   show(popup_background_blocker, current_game_popup)
 
-   let current_game_info = getCurrentGameInfo()
+   let current_game_info = getCurrentGameInfo();
    current_game_info["playerInfo"] = {
       name: player.innerText,
       time: +new Date(), // for get current duration game when relod page
       id: String(+new Date()).substring(0, 6) // just generate random 6 digit game id 
    };
+   current_game_info["openedBlock"] = [];   // get opened couple block id for not lose it when reload page,
+   current_game_info["block_image"] = {};   // get images num thats should be inside each block 
+
+   // fill 16 block and set an id for each block so that when you
+   // click on it you know which picture should be placed from current_game_info
    for (let i = 0; i < 16; i++) {
       let gameContainer_block = cloneCard.cloneNode(true);
       gameContainer_block.classList.remove("forClone");
       gameContainer_block.classList.remove("hide");
+      gameContainer_block.dataset.id = i;
       gameContainer.append(gameContainer_block);
 
       let imgIndex = getRandomNum();
-      current_game_info[i] = imgIndex;
+      current_game_info["block_image"][i] = imgIndex;
    }
    setCurrentGameInfo(current_game_info);
 }
@@ -268,23 +273,30 @@ gameInfo.addEventListener("click", function (event) {
 
 
 let arrImageCheck = [];
-let openedCouple = 0
+
 container_game.addEventListener("click", function (event) {
+   let current_game_info = getCurrentGameInfo();
+
    if (event.target.className.includes("flip-card-front")) {
+
       event.target.parentElement.style.transform = "rotateY(180deg)";
       event.target.parentElement.parentElement.style.transform = "rotateY(180deg)";
       let blockID = event.target.parentElement.parentElement.dataset.id;
-      arrImageCheck.push(blockID);
-      console.log(arrImageCheck);
-      if (arrImageCheck.length === 2) {
-         if (arrImageCheck[0] !== arrImageCheck[1]) {
-            for (const item in gameContainer.children) {
-               console.log(item.dataset);
-            }
-         }
+
+      event.target.nextElementSibling.style.backgroundImage = `url('images/img_${current_game_info["block_image"][blockID]}.png')`;
+
+      let currentOpenedBlock = {
+         block_child_Index: Number(blockID) + 1, // container first child is not img block
+         img_index: current_game_info["block_image"][blockID]
       }
+
+      current_game_info.openedBlock.push(currentOpenedBlock);
+      setCurrentGameInfo(current_game_info); // for case when block is opened after reloading page still stay opened
+
+    
+      
    }
-})
+});
 
 current_game_popup.addEventListener("click", function (event) {
 
@@ -303,6 +315,7 @@ current_game_popup.addEventListener("click", function (event) {
 
    if (event.target.innerText === "Yes" && current_game_popup.dataset.openBtnName === "Restart") {
       hide(event.currentTarget, popup_background_blocker);
+
       resetTimer()
       return;
    }
@@ -314,7 +327,6 @@ current_game_popup.addEventListener("click", function (event) {
 
    if (event.target.innerText === "Yes" && current_game_popup.dataset.openBtnName === "Menu") {
       hide(event.currentTarget, popup_background_blocker);
-      debugger;
       resetTimer();
       setStatus("container_start");
       renderByStatus("container_game");
