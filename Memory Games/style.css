@@ -1,5 +1,3 @@
-
-
 @font-face {
     font-family: 'Bebas Neue';
     src: url('fonts/Regular/BebasNeue-Regular.eot');
@@ -71,7 +69,7 @@
     box-sizing: border-box;
 }
 
-#container_main{
+#container_main {
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -140,11 +138,25 @@
     }
 }
 
-.record_header.record_list {
-    width: 500px;
+
+.list_header_container {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 500px;
+}
+
+table tbody {
+    height: 550px;
+    overflow: auto;
+    display: block;
 }
 
 .record_header {
+    position: absolute;
+    width: 100%;
     min-height: 70px;
     margin-bottom: 20px;
     display: flex;
@@ -153,13 +165,29 @@
 }
 
 .record_list {
-    position: relative;
-    padding: 25px;
-    height: auto;
+    position: absolute;
+    padding: 40px 0px;
+    top: 100px;
+    width: 100%;
+}
+
+*::-webkit-scrollbar {
+    width: 3px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #e0f6ff;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    border-radius: 10px;
+    border: 3px none #ffffff;
 }
 
 .record_list .menue_btn {
-    right: 15px;
+    left: 50%;
+    transform: translateX(-50%);
     bottom: 15px;
 }
 
@@ -293,10 +321,6 @@
     flex-direction: column;
 }
 
-.container_records {
-    width: 550px;
-}
-
 .record_btn {
     margin-top: 6px;
 }
@@ -310,7 +334,6 @@
 
 .record_list span {
     position: absolute;
-
 }
 
 .record_text {
@@ -325,12 +348,15 @@
 
 table {
     padding: 0 10px 10px 10px;
-    border-spacing: 15px;
     margin: 0 auto;
 }
 
 td {
     font: 24px 'Didact Gothic', sans-serif;
+}
+
+td:first-child {
+    word-break: break-word;
 }
 
 th {
@@ -342,17 +368,17 @@ td {
     text-align: center;
     letter-spacing: 4px;
     padding: 15px;
+    width: 200px;
 }
 
 .container_name,
 .container_endGame {
     position: relative;
     width: 500px;
-    height: 300px;
+    height: 355px;
     background-color: white;
     padding: 25px;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
 }
@@ -429,7 +455,13 @@ td {
 }
 
 .container_endGame .menue_btn {
-    right: 135px;
+    bottom: 10px;
+    right: 10px;
+}
+
+.container_endGame .start_btn {
+    bottom: 10px;
+    right: 115px;
 }
 
 .container_gameOver_main_text {
@@ -455,7 +487,7 @@ td {
 
 .container_gameOver_message_text {
     position: absolute;
-    bottom: 70px;
+    bottom: 100px;
     font: 30px 'Didact Gothic', sans-serif;
     letter-spacing: 4px;
     font-weight: 500;
@@ -496,7 +528,7 @@ td {
     background-color: transparent;
     width: 150px;
     height: 150px;
-    opacity: 0.6;
+    opacity: 0.5;
     perspective: 1000px;
     cursor: pointer;
 }
@@ -505,7 +537,7 @@ td {
     position: relative;
     width: 100%;
     height: 100%;
-    transition: 0.6s;
+    transition: 0.5s;
     transform-style: preserve-3d;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }

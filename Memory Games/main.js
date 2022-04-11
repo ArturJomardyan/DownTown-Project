@@ -17,7 +17,8 @@ let menue_btn = document.querySelector(".menue_btn");
 let popup_cancel_btn = document.querySelector(".popup_cancel_btn");
 let currentPlayerName = document.querySelector(".currentPlayerName");
 let gameName = document.querySelector(".gameName");
-// let flip_card = document.querySelector(".flip-card");
+let tBody = document.querySelector("tBody");
+let time = document.querySelector(".time");
 let player = document.querySelector(".player");
 let houre = document.querySelector(".hh");
 let minute = document.querySelector(".mm");
@@ -31,14 +32,6 @@ function getStatus() {
    return localStorage.getItem("currentPage") || "container_start";
 }
 
-function setRecordsList(arr = []) {
-   localStorage.setItem("Records List", JSON.stringify(arr));
-}
-
-function getRecordsList() {
-   return JSON.parse(localStorage.getItem("Records List")) || [];
-}
-
 function setCurrentGameInfo(obj = {}) {
    localStorage.setItem("Current Game Info", JSON.stringify(obj));
 }
@@ -47,13 +40,33 @@ function getCurrentGameInfo() {
    return JSON.parse(localStorage.getItem("Current Game Info")) || {};
 }
 
+function setRecordsList(obj = {}) {
+   localStorage.setItem("Records List", JSON.stringify(obj));
+};
+
+function getRecordsList() {
+   return JSON.parse(localStorage.getItem("Records List")) || {};
+}
+
+
+let hide = (...elem) => elem.forEach(el => el.classList.add("hide"))
+let show = (...elem) => elem.forEach(el => el.classList.remove("hide"))
+
+
+let list = getRecordsList();
+
+if (Object.keys(list).length === 0) {
+   list.recordsList = [];
+   list.lastGame = {};
+   setRecordsList(list);
+}
+
 
 var hr = 0;
 var min = 0;
 var sec = 0;
 
 let stoptime = true;
-
 
 function timerCycle() {
 
@@ -95,8 +108,8 @@ function timerCycle() {
 
       setTimeout("timerCycle()", 1000);
    }
-
 }
+
 
 function resetTimer() {
    stoptime = true;
@@ -108,28 +121,43 @@ function resetTimer() {
    min = 0;
 }
 
+
 function drawRecordsList() {
+
    let list = getRecordsList();
-   console.log(list);
-   if (list.length === 0) {
+
+   if (tBody.children.length > 1) {
+      let trCollection = tBody.querySelectorAll("tr");
+      for (let i = 1; i < trCollection.length; i++) {
+         const element = trCollection[i];
+         element.remove();
+      }
+   }
+
+   if (list.recordsList.length === 0) {
       let row = `<tr><td colspan="3">no results yet</td></tr>`
       table.tBodies[0].insertAdjacentHTML("beforeend", row);
    } else {
-      list.forEach(el => {
+      list.recordsList.forEach(el => {
          let row = `<tr>
          <td>${el.name}</td>
          <td>${el.time}</td>
          <td>${el.id}</td>
        </td>`
          table.tBodies[0].insertAdjacentHTML("beforeend", row);
-      })
+      });
+      let footer = `<tr><td colspan="3">Last Game</td></tr>
+      <tr>
+         <td>${list.lastGame.name}</td>
+         <td>${list.lastGame.time}</td>
+         <td>${list.lastGame.id}</td>
+       </td>`
+      table.tBodies[0].insertAdjacentHTML("beforeend", footer);
    }
 }
 
-let hide = (...elem) => elem.forEach(el => el.classList.add("hide"))
-let show = (...elem) => elem.forEach(el => el.classList.remove("hide"))
 
-function renderByStatus(currentPage = "") {
+function renderByStatus() {
    const currentPageStatus = getStatus();
    const allContainerArr = [
       container_start,
@@ -140,21 +168,22 @@ function renderByStatus(currentPage = "") {
    ]
 
    allContainerArr.forEach(el => {
-      let resualt = el.className.includes(currentPageStatus);
-      if (resualt) el.classList.remove("hide");
-      if (currentPage) {
-         let resualt = el.className.includes(currentPage);
-         if (resualt) el.classList.add("hide");
+      if (el.className.includes(currentPageStatus)) {
+         el.classList.remove("hide");
+      } else {
+         let resualt = el.className.includes("hide");
+         if (!resualt) el.classList.add("hide");
       }
    })
-
 }
 
 renderByStatus();
 
+
 let arrIndexImg = [];
 
 function getRandomNum() {
+   if(arrIndexImg.length === 15) arrIndexImg.length = 0;
    //image count = 8, generate random num in range 1-8 (including min-max) --
    // -- for give each image no more two time
    let random_num = Math.floor(1 + Math.random() * 8);
@@ -170,66 +199,40 @@ function getRandomNum() {
    return getRandomNum();
 }
 
-function startGame() {
-   popup_message.innerText = "Are You Ready ?"
-   show(popup_background_blocker, current_game_popup)
-
-   let current_game_info = getCurrentGameInfo();
-   current_game_info["playerInfo"] = {
-      name: player.innerText,
-      time: +new Date(), // for get current duration game when relod page
-      id: String(+new Date()).substring(0, 6) // just generate random 6 digit game id 
-   };
-   current_game_info["openedBlock"] = [];   // get opened couple block id for not lose it when reload page,
-   current_game_info["block_image"] = {};   // get images num thats should be inside each block 
-
-   // fill 16 block and set an id for each block so that when you
-   // click on it you know which picture should be placed from current_game_info
-   for (let i = 0; i < 16; i++) {
-      let gameContainer_block = cloneCard.cloneNode(true);
-      gameContainer_block.classList.remove("forClone");
-      gameContainer_block.classList.remove("hide");
-      gameContainer_block.dataset.id = i;
-      gameContainer.append(gameContainer_block);
-
-      let imgIndex = getRandomNum();
-      current_game_info["block_image"][i] = imgIndex;
-   }
-   setCurrentGameInfo(current_game_info);
-}
 
 container_start.addEventListener("click", function (event) {
    if (event.target.innerText === "New Game") {
       setStatus("container_name")
-      renderByStatus("container_start")
+      renderByStatus()
       return;
    };
    if (event.target.innerText === "Records") {
       drawRecordsList();
       setStatus("container_records");
-      renderByStatus("container_start");
+      renderByStatus();
    };
 });
 
-newGame_input.setAttribute("maxlength", "15");
+newGame_input.setAttribute("maxlength", "20");
 
 // delete validation message if it`s exist
 newGame_input.addEventListener("input", function () {
    if (this.length !== 0) {
       this.nextElementSibling?.remove()
    }
-})
+});
+
 
 container_name.addEventListener("click", function (event) {
    if (event.target.innerText === "Menu") {
       newGame_input.value = "";
       setStatus("container_start");
-      renderByStatus("container_name");
+      renderByStatus();
       return;
    }
    if (event.target.innerText === "Start") {
       if (newGame_input.value === "") {
-         // check if exist validation message or not yet
+         // check if exist validation message or not yet,if not then add
          if (this.children[0].children.length !== 3) {
             let message = "Please Enter The Name"
             let where = "afterend"
@@ -242,18 +245,20 @@ container_name.addEventListener("click", function (event) {
          popup_cancel_btn.innerText = "Back";
          current_game_popup.dataset.openBtnName = "Start"
          setStatus("container_game");
-         renderByStatus("container_name");
+         renderByStatus();
          startGame();
       }
    }
 })
 
+
 container_records.addEventListener("click", function (event) {
    if (event.target.innerText === "Menu") {
       setStatus("container_start");
-      renderByStatus("container_records");
+      renderByStatus();
    }
 });
+
 
 gameInfo.addEventListener("click", function (event) {
    if (event.target.innerText === "Restart") {
@@ -272,7 +277,58 @@ gameInfo.addEventListener("click", function (event) {
 })
 
 
-let arrImageCheck = [];
+container_endGame.addEventListener("click", function (event) {
+   if (event.target.innerText === "Restart") {
+      setStatus("container_game");
+      renderByStatus();
+      return
+   }
+   if (event.target.innerText === "Menu") {
+      setStatus("container_start");
+      renderByStatus();
+   }
+})
+
+
+function startGame() {
+   popup_message.innerText = "Are You Ready ?"
+   show(popup_background_blocker, current_game_popup);
+
+
+   let current_game_info = getCurrentGameInfo();
+
+   current_game_info["playerInfo"] = {
+      name: player.innerText,
+      time: +new Date(), // for get current duration game when relod page
+      id: String(+new Date()).substring(0, 6) // just generate random 6 digit game id 
+   };
+
+   let list = getRecordsList();
+   list.lastGame = current_game_info["playerInfo"];
+   setRecordsList(list);
+
+   current_game_info["openedBlock"] = [];   // get opened couple block id for not lose it when reload page,
+   current_game_info["block_image"] = {};   // get images num thats should be inside each block 
+
+   // fill 16 block and set an id for each block so that when you
+   // click on it you know which picture should be placed from current_game_info
+
+   let divCollection = gameContainer.querySelectorAll(".flip-card");
+   if(divCollection.length) divCollection.forEach(el => el.remove());
+
+   for (let i = 0; i < 16; i++) {
+      let gameContainer_block = cloneCard.cloneNode(true);
+      gameContainer_block.classList.remove("forClone");
+      gameContainer_block.classList.remove("hide");
+      gameContainer_block.dataset.id = i + 1;
+      gameContainer.append(gameContainer_block);
+
+      let imgIndex = getRandomNum();
+      current_game_info["block_image"][i + 1] = imgIndex;
+   }
+   setCurrentGameInfo(current_game_info);
+}
+
 
 container_game.addEventListener("click", function (event) {
    let current_game_info = getCurrentGameInfo();
@@ -286,17 +342,161 @@ container_game.addEventListener("click", function (event) {
       event.target.nextElementSibling.style.backgroundImage = `url('images/img_${current_game_info["block_image"][blockID]}.png')`;
 
       let currentOpenedBlock = {
-         block_child_Index: Number(blockID) + 1, // container first child is not img block
+         block_child_Index: Number(blockID),
          img_index: current_game_info["block_image"][blockID]
       }
 
       current_game_info.openedBlock.push(currentOpenedBlock);
-      setCurrentGameInfo(current_game_info); // for case when block is opened after reloading page still stay opened
 
-    
-      
+      if (current_game_info.openedBlock.length % 2 === 0) {
+
+         if (current_game_info.openedBlock.at(-1).img_index !== current_game_info.openedBlock.at(-2).img_index) {
+
+            let indexForRotateBack_1 = current_game_info.openedBlock.at(-1).block_child_Index
+            let indexForRotateBack_2 = current_game_info.openedBlock.at(-2).block_child_Index
+
+            setTimeout(() => {
+               gameContainer.children[indexForRotateBack_1].style.transform = null;
+               gameContainer.children[indexForRotateBack_1].children[0].style.transform = null;
+
+               gameContainer.children[indexForRotateBack_2].style.transform = null;
+               gameContainer.children[indexForRotateBack_2].children[0].style.transform = null;
+            }, 500); // back rotate blocks in case when two image is not same:
+
+            setTimeout(() => {
+               gameContainer.children[indexForRotateBack_1].children[0].children[1].style.backgroundImage = null
+               gameContainer.children[indexForRotateBack_2].children[0].children[1].style.backgroundImage = null
+            }, 1000); // image should deleted 1 second later: in order to user can`t see delating moment:
+
+            current_game_info.openedBlock.splice(-2, 2);
+
+         } else {
+            if (current_game_info.openedBlock.length === 2) {
+
+               setTimeout(() => {
+                  setStatus("container_endGame");
+                  renderByStatus();
+               }, 1000);
+
+               let PlaceMessage = ""
+               let checkPlace = ""
+
+               let list = getRecordsList();
+               list.lastGame.time = time.innerText;
+               list.recordsList.push(list.lastGame);
+
+               let arrRecordsList = list.recordsList;
+
+               if (arrRecordsList.length === 1) {
+                  PlaceMessage = `You took 1-st place`
+               } else {
+
+                  arrRecordsList = arrRecordsList.sort((a, b) => {
+                     a = get_milliseconde_from_time(a.time);
+                     b = get_milliseconde_from_time(b.time);
+                     return a - b
+                  });
+
+                  // find last game place in list
+
+                  arrRecordsList.forEach((el, index) => {
+                     a = get_milliseconde_from_time(el.time);
+                     b = get_milliseconde_from_time(list.lastGame.time);
+                     if (a === b) checkPlace = index;
+                  });
+
+                  if (checkPlace < 5) {
+                     PlaceMessage = `You took ${checkPlace + 1}-st place`
+                  } else {
+                     PlaceMessage = `Result is Out of Top 5`
+                  }
+
+
+                  if (arrRecordsList.length > 5) {
+                     arrRecordsList.pop();
+                  }
+               }
+
+               setRecordsList(list);
+
+               container_endGame.children[1].innerText = current_game_info.playerInfo.name; // take from 
+               container_endGame.children[2].innerText = time.innerText; // take from HTML
+               container_endGame.children[3].innerText = PlaceMessage
+            }
+
+         }
+      }
+      setCurrentGameInfo(current_game_info); // for case when block is opened after reloading page still stay opened
    }
 });
+
+function get_time_from_milliseconde(num) {
+   let time = ""
+   num = num / 1000
+   if (num > 3599) {
+
+      let hour = Math.trunc(String(num / 3600));
+      if (hour < 10) {
+         hour = "0" + hour;
+      }
+      let min = num % 3600;
+      min = get_time_from_milliseconde(min * 1000);
+      min = min.split(":").splice(1).join(":");
+      time = hour + ":" + min
+      return time
+
+   } else if (num > 59 && num < 3600) {
+
+
+      let min = Math.trunc(String(num / 60));
+      let sec = num % 60;
+
+      if (min < 10 && sec < 10) {
+         time = "00:0" + min + ":0" + sec;
+         return time
+      }
+      if (min < 10 && sec > 9) {
+         time = "00:0" + min + ":" + sec;
+         return time
+      }
+      if (min > 9 && sec < 10) {
+         time = "00:" + min + ":0" + sec;
+         return time
+      }
+      if (min > 9 && sec > 9) {
+         time = "00:" + min + ":" + sec;
+         return time
+      }
+
+   } else {
+
+      if (num < 10) {
+         time = "00:00:0" + num;
+         return time
+      }
+      if (num > 10 && num < 60) {
+         time = "00:00:" + num;
+         return time
+      }
+
+   }
+}
+
+
+function get_milliseconde_from_time(time) {
+
+   let [hr, min, sec] = time.split(":");
+
+   let hr_mill = Number(hr) * 3600000;
+   let min_mill = Number(min) * 60000;
+   let sec_mill = Number(sec) * 1000;
+
+   let convert_time_mill = hr_mill + min_mill + sec_mill
+
+   return convert_time_mill
+
+}
+
 
 current_game_popup.addEventListener("click", function (event) {
 
@@ -309,14 +509,15 @@ current_game_popup.addEventListener("click", function (event) {
    if (event.target.innerText === "Back" && current_game_popup.dataset.openBtnName === "Start") {
       hide(event.currentTarget, popup_background_blocker);
       setStatus("container_name");
-      renderByStatus("container_game");
+      renderByStatus();
       return;
    }
 
    if (event.target.innerText === "Yes" && current_game_popup.dataset.openBtnName === "Restart") {
       hide(event.currentTarget, popup_background_blocker);
-
-      resetTimer()
+      resetTimer();
+      timerCycle();
+      // startGame();
       return;
    }
 
@@ -327,15 +528,15 @@ current_game_popup.addEventListener("click", function (event) {
 
    if (event.target.innerText === "Yes" && current_game_popup.dataset.openBtnName === "Menu") {
       hide(event.currentTarget, popup_background_blocker);
-      resetTimer();
       setStatus("container_start");
-      renderByStatus("container_game");
+      renderByStatus();
       return;
    }
 
    if (event.target.innerText === "Cancel" && current_game_popup.dataset.openBtnName === "Menu") {
       hide(event.currentTarget, popup_background_blocker);
    }
+
 });
 
 
