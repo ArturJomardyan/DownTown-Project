@@ -175,6 +175,12 @@ function renderByStatus() {
          if (!resualt) el.classList.add("hide");
       }
    })
+   if (currentPageStatus === "container_records") {
+      drawRecordsList();
+   };
+   if (currentPageStatus === "container_endGame") {
+      gameOver_info(container_endGame);
+   };
 }
 
 renderByStatus();
@@ -183,7 +189,7 @@ renderByStatus();
 let arrIndexImg = [];
 
 function getRandomNum() {
-   if(arrIndexImg.length === 15) arrIndexImg.length = 0;
+   if (arrIndexImg.length === 15) arrIndexImg.length = 0;
    //image count = 8, generate random num in range 1-8 (including min-max) --
    // -- for give each image no more two time
    let random_num = Math.floor(1 + Math.random() * 8);
@@ -299,8 +305,9 @@ function startGame() {
 
    current_game_info["playerInfo"] = {
       name: player.innerText,
-      time: +new Date(), // for get current duration game when relod page
-      id: String(+new Date()).substring(0, 6) // just generate random 6 digit game id 
+      time: "", // for get current duration game when relod page
+      id: String(+new Date()).substring(0, 6), // just generate random 6 digit game id 
+      message: ""
    };
 
    let list = getRecordsList();
@@ -314,7 +321,7 @@ function startGame() {
    // click on it you know which picture should be placed from current_game_info
 
    let divCollection = gameContainer.querySelectorAll(".flip-card");
-   if(divCollection.length) divCollection.forEach(el => el.remove());
+   if (divCollection.length) divCollection.forEach(el => el.remove());
 
    for (let i = 0; i < 16; i++) {
       let gameContainer_block = cloneCard.cloneNode(true);
@@ -378,7 +385,7 @@ container_game.addEventListener("click", function (event) {
                   renderByStatus();
                }, 1000);
 
-               let PlaceMessage = ""
+
                let checkPlace = ""
 
                let list = getRecordsList();
@@ -388,7 +395,7 @@ container_game.addEventListener("click", function (event) {
                let arrRecordsList = list.recordsList;
 
                if (arrRecordsList.length === 1) {
-                  PlaceMessage = `You took 1-st place`
+                  current_game_info.playerInfo.message = `You took 1-st place`
                } else {
 
                   arrRecordsList = arrRecordsList.sort((a, b) => {
@@ -406,9 +413,9 @@ container_game.addEventListener("click", function (event) {
                   });
 
                   if (checkPlace < 5) {
-                     PlaceMessage = `You took ${checkPlace + 1}-st place`
+                     current_game_info.playerInfo.message = `You took ${checkPlace + 1}-st place`
                   } else {
-                     PlaceMessage = `Result is Out of Top 5`
+                     current_game_info.playerInfo.message = `Result is Out of Top 5`
                   }
 
 
@@ -419,9 +426,13 @@ container_game.addEventListener("click", function (event) {
 
                setRecordsList(list);
 
-               container_endGame.children[1].innerText = current_game_info.playerInfo.name; // take from 
-               container_endGame.children[2].innerText = time.innerText; // take from HTML
-               container_endGame.children[3].innerText = PlaceMessage
+               let gameDuration = get_time_from_milliseconde(+new Date() - current_game_info.playerInfo.time);
+               gameDuration = gameDuration.split(".")[0]; // cut milliseconds 
+               current_game_info.playerInfo.time = gameDuration
+               
+               setCurrentGameInfo(current_game_info);
+
+               gameOver_info(container_endGame);
             }
 
          }
@@ -429,6 +440,13 @@ container_game.addEventListener("click", function (event) {
       setCurrentGameInfo(current_game_info); // for case when block is opened after reloading page still stay opened
    }
 });
+
+function gameOver_info(container) {
+   let current_game_info = getCurrentGameInfo()
+   container.children[1].innerText = current_game_info.playerInfo.name;
+   container.children[2].innerText = current_game_info.playerInfo.time;
+   container.children[3].innerText = current_game_info.playerInfo.message;
+}
 
 function get_time_from_milliseconde(num) {
    let time = ""
@@ -502,6 +520,9 @@ current_game_popup.addEventListener("click", function (event) {
 
    if (event.target.innerText === "Yes" && current_game_popup.dataset.openBtnName === "Start") {
       hide(event.currentTarget, popup_background_blocker);
+      let player = getCurrentGameInfo()
+      player.playerInfo.time = +new Date();
+      setCurrentGameInfo(player);
       timerCycle();
       return;
    }
