@@ -48,7 +48,6 @@ function getRecordsList() {
    return JSON.parse(localStorage.getItem("Records List")) || {};
 }
 
-
 let hide = (...elem) => elem.forEach(el => el.classList.add("hide"))
 let show = (...elem) => elem.forEach(el => el.classList.remove("hide"))
 
@@ -61,23 +60,22 @@ if (Object.keys(list).length === 0) {
    setRecordsList(list);
 }
 
+let hr = 0;
+let min = 0;
+let sec = 0;
 
-var hr = 0;
-var min = 0;
-var sec = 0;
 
-let stoptime = true;
+let stoptime = false;
 
 function timerCycle() {
 
-   stoptime = false;
-
    if (!stoptime) {
+
       sec = Number(sec);
       min = Number(min);
       hr = Number(hr);
 
-      sec = sec + 1;
+      sec = sec + 1
 
       if (sec == 60) {
          min = min + 1;
@@ -110,6 +108,10 @@ function timerCycle() {
    }
 }
 
+function startTimer() {
+   stoptime = false;
+   setTimeout(() => timerCycle(), 1000); // first second
+}
 
 function resetTimer() {
    stoptime = true;
@@ -373,27 +375,27 @@ container_game.addEventListener("click", function (event) {
             setTimeout(() => {
                gameContainer.children[indexForRotateBack_1].children[0].children[1].style.backgroundImage = null
                gameContainer.children[indexForRotateBack_2].children[0].children[1].style.backgroundImage = null
-            }, 1000); // image should deleted 1 second later: in order to user can`t see delating moment:
+            }, 600); // image should deleted 1 second later: in order to user can`t see delating moment:
 
             current_game_info.openedBlock.splice(-2, 2);
 
          } else {
             if (current_game_info.openedBlock.length === 2) {
-
+               stoptime = true; // stop woriking time until reset will be called one second later
                setTimeout(() => {
                   setStatus("container_endGame");
                   renderByStatus();
+                  resetTimer();
                }, 1000);
-
 
                let checkPlace = ""
 
                let list = getRecordsList();
                list.lastGame.time = time.innerText;
+
+
                list.recordsList.push(list.lastGame);
-
                let arrRecordsList = list.recordsList;
-
                if (arrRecordsList.length === 1) {
                   current_game_info.playerInfo.message = `You took 1-st place`
                } else {
@@ -429,7 +431,7 @@ container_game.addEventListener("click", function (event) {
                let gameDuration = get_time_from_milliseconde(+new Date() - current_game_info.playerInfo.time);
                gameDuration = gameDuration.split(".")[0]; // cut milliseconds 
                current_game_info.playerInfo.time = gameDuration
-               
+
                setCurrentGameInfo(current_game_info);
 
                gameOver_info(container_endGame);
@@ -468,7 +470,7 @@ function get_time_from_milliseconde(num) {
 
       let min = Math.trunc(String(num / 60));
       let sec = num % 60;
-
+      sec = Math.ceil(sec);
       if (min < 10 && sec < 10) {
          time = "00:0" + min + ":0" + sec;
          return time
@@ -523,7 +525,7 @@ current_game_popup.addEventListener("click", function (event) {
       let player = getCurrentGameInfo()
       player.playerInfo.time = +new Date();
       setCurrentGameInfo(player);
-      timerCycle();
+      startTimer();
       return;
    }
 
@@ -536,9 +538,18 @@ current_game_popup.addEventListener("click", function (event) {
 
    if (event.target.innerText === "Yes" && current_game_popup.dataset.openBtnName === "Restart") {
       hide(event.currentTarget, popup_background_blocker);
+      current_game_popup.dataset.openBtnName = "Start";
       resetTimer();
-      timerCycle();
-      // startGame();
+      // get and after set current player name because when game restart name will not change
+      let info = getCurrentGameInfo();
+      let name = info.playerInfo.name
+      show(popup_background_blocker)
+      setTimeout(() => {
+         startGame();
+      }, 400);
+      info = getCurrentGameInfo();
+      info.playerInfo.name = name
+      setCurrentGameInfo(info);
       return;
    }
 
@@ -549,6 +560,7 @@ current_game_popup.addEventListener("click", function (event) {
 
    if (event.target.innerText === "Yes" && current_game_popup.dataset.openBtnName === "Menu") {
       hide(event.currentTarget, popup_background_blocker);
+      resetTimer();
       setStatus("container_start");
       renderByStatus();
       return;
