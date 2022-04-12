@@ -65,7 +65,6 @@ let hr = 0;
 let min = 0;
 let sec = 0;
 
-
 let stoptime = false;
 
 function timerCycle() {
@@ -180,11 +179,58 @@ function renderByStatus() {
    })
    if (currentPageStatus === "container_records") {
       drawRecordsList();
+      return
    };
    if (currentPageStatus === "container_endGame") {
       gameOver_info(container_endGame);
+      return
    };
+   if (currentPageStatus === "container_game") {
+
+      // let timeNow = +new Date();
+
+      // gameStartTime = info.playerInfo.time
+      // time = get_time_from_milliseconde(timeNow - gameStartTime);
+      // time = time.split(".")[0]; // cut millisecond
+
+      // time = time.split(":")
+      // hr = time[0];
+      // min = time[1];
+      // sec = time[2];
+      // startTimer()
+
+      // player.innerText = info.playerInfo.name
+
+      // let divCollection = gameContainer.querySelectorAll(".flip-card");
+      // if (divCollection.length) divCollection.forEach(el => el.remove());
+
+      // let userInfo = getCurrentGameInfo();
+      // let firstBlockImg = userInfo.openedBlock[0].img_index
+      // let secondBlockImg = userInfo.openedBlock[1].img_index
+
+
+      // for (let i = 0; i < 16; i++) {
+      //    let gameContainer_block = cloneCard.cloneNode(true);
+      //    gameContainer_block.classList.remove("forClone");
+      //    gameContainer_block.classList.remove("hide");
+      //    gameContainer_block.dataset.id = i + 1;
+      //    gameContainer.append(gameContainer_block);
+
+      //    if (userInfo.openedBlock.length === 1) {
+      //       let firstBlockIndex = userInfo.openedBlock[0].block_child_Index;
+      //       let firstBlockImg = userInfo.openedBlock[0].img_index
+
+      //       if (gameContainer_block.dataset.id === firstBlockIndex) {
+      //          gameContainer_block.style.transform = "rotateY(180deg)";
+      //          gameContainer_block.firstElementChild.style.transform = "rotateY(180deg)";
+      //          gameContainer_block.firstElementChild.lastElementChild.style.backgroundImage = `url('images/img_${firstBlockImg}.png')`;
+      //       }
+         // }
+
+      // }
+   }
 }
+
 
 renderByStatus();
 
@@ -216,7 +262,6 @@ container_start.addEventListener("click", function (event) {
       return;
    };
    if (event.target.innerText === "Records") {
-      drawRecordsList();
       setStatus("container_records");
       renderByStatus();
    };
@@ -309,7 +354,6 @@ function startGame() {
    popup_message.innerText = "Are You Ready ?"
    show(popup_background_blocker, current_game_popup);
 
-
    let current_game_info = getCurrentGameInfo();
 
    current_game_info["playerInfo"] = {
@@ -327,11 +371,13 @@ function startGame() {
    current_game_info["openedBlock"] = [];   // get opened couple block id for not lose it when reload page,
    current_game_info["block_image"] = {};   // get images num thats should be inside each block 
 
-   // fill 16 block and set an id for each block so that when you
-   // click on it you know which picture should be placed from current_game_info
+   //remove previous game bloks
 
    let divCollection = gameContainer.querySelectorAll(".flip-card");
    if (divCollection.length) divCollection.forEach(el => el.remove());
+
+   // fill 16 block and set an id for each block so that when you
+   // click on it you know which picture should be placed from current_game_info
 
    for (let i = 0; i < 16; i++) {
       let gameContainer_block = cloneCard.cloneNode(true);
@@ -573,7 +619,6 @@ current_game_popup.addEventListener("click", function (event) {
       resetTimer();
       setStatus("container_start");
       renderByStatus();
-
       return;
    }
 
