@@ -57,6 +57,7 @@ let list = getRecordsList();
 if (Object.keys(list).length === 0) {
    list.recordsList = [];
    list.lastGame = {};
+   list.previousGame = {};
    setRecordsList(list);
 }
 
@@ -287,6 +288,12 @@ gameInfo.addEventListener("click", function (event) {
 
 container_endGame.addEventListener("click", function (event) {
    if (event.target.innerText === "Restart") {
+      let info = getCurrentGameInfo();
+      let name = info.playerInfo.name
+      startGame();
+      info = getCurrentGameInfo();
+      info.playerInfo.name = name
+      setCurrentGameInfo(info);
       setStatus("container_game");
       renderByStatus();
       return
@@ -313,6 +320,7 @@ function startGame() {
    };
 
    let list = getRecordsList();
+   list.previousGame = list.lastGame;
    list.lastGame = current_game_info["playerInfo"];
    setRecordsList(list);
 
@@ -339,7 +347,7 @@ function startGame() {
 }
 
 
-container_game.addEventListener("click", function (event) {
+gameContainer.addEventListener("click", function (event) {
    let current_game_info = getCurrentGameInfo();
 
    if (event.target.className.includes("flip-card-front")) {
@@ -392,10 +400,10 @@ container_game.addEventListener("click", function (event) {
 
                let list = getRecordsList();
                list.lastGame.time = time.innerText;
-
-
                list.recordsList.push(list.lastGame);
+
                let arrRecordsList = list.recordsList;
+
                if (arrRecordsList.length === 1) {
                   current_game_info.playerInfo.message = `You took 1-st place`
                } else {
@@ -419,7 +427,6 @@ container_game.addEventListener("click", function (event) {
                   } else {
                      current_game_info.playerInfo.message = `Result is Out of Top 5`
                   }
-
 
                   if (arrRecordsList.length > 5) {
                      arrRecordsList.pop();
@@ -540,7 +547,7 @@ current_game_popup.addEventListener("click", function (event) {
       hide(event.currentTarget, popup_background_blocker);
       current_game_popup.dataset.openBtnName = "Start";
       resetTimer();
-      // get and after set current player name because when game restart name will not change
+      // get and after set current player name so that the name does not change after the restart
       let info = getCurrentGameInfo();
       let name = info.playerInfo.name
       show(popup_background_blocker)
@@ -560,9 +567,13 @@ current_game_popup.addEventListener("click", function (event) {
 
    if (event.target.innerText === "Yes" && current_game_popup.dataset.openBtnName === "Menu") {
       hide(event.currentTarget, popup_background_blocker);
+      let list = getRecordsList();
+      list.lastGame = list.previousGame;
+      setRecordsList(list);
       resetTimer();
       setStatus("container_start");
       renderByStatus();
+
       return;
    }
 
