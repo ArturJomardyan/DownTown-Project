@@ -315,7 +315,7 @@ function startGame() {
 
    current_game_info["playerInfo"] = {
       name: player.innerText,
-      time: "", // for get current duration game when relod page
+      time: "",
       id: String(+new Date()).substring(7), // just generate random 6 digit game id form last part of new Date
       message: ""
    };
@@ -397,7 +397,7 @@ gameContainer.addEventListener("click", function (event) {
             show(popup_background_blocker); // cant't click others block when two bloks are open 
             setTimeout(() => hide(popup_background_blocker), 500);  // make all bloks clickable after closing previous two bloks
             if (current_game_info.openedBlock.length === 16) {
-               stoptime = true; // stop woriking time until reset will be called one second later
+               stoptime = true; // stop woriking time until reset function will be called one second later
                setTimeout(() => {
                   setStatus("container_endGame");
                   renderByStatus();
@@ -421,7 +421,7 @@ gameContainer.addEventListener("click", function (event) {
                      return a - b
                   });
 
-                  // find last game place in list
+                  // find last game place in already sorted list
 
                   arrRecordsList.forEach((el, index) => {
                      a = get_milliseconde_from_time(el.time);
