@@ -449,7 +449,7 @@ gameContainer.addEventListener("click", function (event) {
             }
          }
       }
-      setCurrentGameInfo(current_game_info); // for case when block is opened after reloading page still stay opened
+      setCurrentGameInfo(current_game_info); 
    }
 });
 
