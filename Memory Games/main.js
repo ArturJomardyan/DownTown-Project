@@ -122,7 +122,6 @@ function resetTimer() {
    min = 0;
 }
 
-
 function drawRecordsList() {
    let list = getRecordsList();
 
@@ -165,7 +164,6 @@ function goToMenu(str = "container_start"){
    renderByStatus();
 }
 
-
 function renderByStatus() {
    const currentPageStatus = getStatus();
    const allContainerArr = [
@@ -199,7 +197,6 @@ function renderByStatus() {
 
 renderByStatus();
 
-
 let arrIndexImg = [];
 
 function getRandomNum() {
@@ -218,7 +215,6 @@ function getRandomNum() {
    }
    return getRandomNum();
 }
-
 
 container_start.addEventListener("click", function (event) {
    if (event.target.innerText === "New Game") {
@@ -240,7 +236,6 @@ newGame_input.addEventListener("input", function () {
       this.nextElementSibling?.remove()
    }
 });
-
 
 container_name.addEventListener("click", function (event) {
    if (event.target.innerText === "Menu") {
@@ -271,14 +266,12 @@ container_name.addEventListener("click", function (event) {
    }
 })
 
-
 container_records.addEventListener("click", function (event) {
    if (event.target.innerText === "Menu") {
       setStatus("container_start");
       renderByStatus();
    }
 });
-
 
 gameInfo.addEventListener("click", function (event) {
    if (event.target.innerText === "Restart") {
@@ -295,7 +288,6 @@ gameInfo.addEventListener("click", function (event) {
       show(popup_background_blocker, current_game_popup);
    }
 })
-
 
 container_endGame.addEventListener("click", function (event) {
    if (event.target.innerText === "Restart") {
@@ -314,7 +306,6 @@ container_endGame.addEventListener("click", function (event) {
       renderByStatus();
    }
 })
-
 
 function startGame() {
    popup_message.innerText = "Are You Ready ?"
@@ -357,7 +348,6 @@ function startGame() {
    }
    setCurrentGameInfo(current_game_info);
 }
-
 
 gameContainer.addEventListener("click", function (event) {
    let current_game_info = getCurrentGameInfo();
@@ -517,7 +507,6 @@ function get_time_from_milliseconde(num) {
    }
 }
 
-
 function get_milliseconde_from_time(time) {
    let [hr, min, sec] = time.split(":");
 
@@ -529,7 +518,6 @@ function get_milliseconde_from_time(time) {
 
    return convert_time_mill
 }
-
 
 current_game_popup.addEventListener("click", function (event) {
    if (event.target.innerText === "Yes" && current_game_popup.dataset.openBtnName === "Start") {
