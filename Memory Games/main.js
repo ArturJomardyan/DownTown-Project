@@ -156,6 +156,15 @@ function drawRecordsList() {
    }
 }
 
+function goToMenu(){
+   let list = getRecordsList();
+   list.lastGame = list.previousGame;
+   setRecordsList(list);
+   resetTimer();
+   setStatus("container_start");
+   renderByStatus();
+}
+
 
 function renderByStatus() {
    const currentPageStatus = getStatus();
@@ -183,6 +192,9 @@ function renderByStatus() {
       gameOver_info(container_endGame);
       return
    };
+   if(currentPageStatus === "container_game"){
+      goToMenu();
+   }
 }
 
 renderByStatus();
@@ -199,7 +211,6 @@ function getRandomNum() {
       arrIndexImg.push(random_num);
       return random_num
    }
-   debugger;
    let count = arrIndexImg.filter(num => num === random_num).length < 2;
    if (count) {
       arrIndexImg.push(random_num);
@@ -253,7 +264,8 @@ container_name.addEventListener("click", function (event) {
          popup_cancel_btn.innerText = "Back";
          current_game_popup.dataset.openBtnName = "Start"
          setStatus("container_game");
-         renderByStatus();
+         hide(container_name);
+         show(container_game)
          startGame();
       }
    }
@@ -560,12 +572,7 @@ current_game_popup.addEventListener("click", function (event) {
 
    if (event.target.innerText === "Yes" && current_game_popup.dataset.openBtnName === "Menu") {
       hide(event.currentTarget, popup_background_blocker);
-      let list = getRecordsList();
-      list.lastGame = list.previousGame;
-      setRecordsList(list);
-      resetTimer();
-      setStatus("container_start");
-      renderByStatus();
+      goToMenu();
       return;
    }
 
