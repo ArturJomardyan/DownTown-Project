@@ -225,7 +225,7 @@ function renderByStatus() {
       //          gameContainer_block.firstElementChild.style.transform = "rotateY(180deg)";
       //          gameContainer_block.firstElementChild.lastElementChild.style.backgroundImage = `url('images/img_${firstBlockImg}.png')`;
       //       }
-         // }
+      // }
 
       // }
    }
@@ -238,7 +238,7 @@ renderByStatus();
 let arrIndexImg = [];
 
 function getRandomNum() {
-   if (arrIndexImg.length === 15) arrIndexImg.length = 0;
+   if (arrIndexImg.length === 16) arrIndexImg.length = 0;
    //image count = 8, generate random num in range 1-8 (including min-max) --
    // -- for give each image no more two time
    let random_num = Math.floor(1 + Math.random() * 8);
@@ -246,6 +246,7 @@ function getRandomNum() {
       arrIndexImg.push(random_num);
       return random_num
    }
+   debugger;
    let count = arrIndexImg.filter(num => num === random_num).length < 2;
    if (count) {
       arrIndexImg.push(random_num);
@@ -359,7 +360,7 @@ function startGame() {
    current_game_info["playerInfo"] = {
       name: player.innerText,
       time: "", // for get current duration game when relod page
-      id: String(+new Date()).substring(0, 6), // just generate random 6 digit game id 
+      id: String(+new Date()).substring(7), // just generate random 6 digit game id form last part of new Date
       message: ""
    };
 
@@ -413,7 +414,10 @@ gameContainer.addEventListener("click", function (event) {
 
       if (current_game_info.openedBlock.length % 2 === 0) {
 
+
          if (current_game_info.openedBlock.at(-1).img_index !== current_game_info.openedBlock.at(-2).img_index) {
+
+            show(popup_background_blocker); // cant't click others block when two bloks are open 
 
             let indexForRotateBack_1 = current_game_info.openedBlock.at(-1).block_child_Index
             let indexForRotateBack_2 = current_game_info.openedBlock.at(-2).block_child_Index
@@ -424,6 +428,8 @@ gameContainer.addEventListener("click", function (event) {
 
                gameContainer.children[indexForRotateBack_2].style.transform = null;
                gameContainer.children[indexForRotateBack_2].children[0].style.transform = null;
+
+               hide(popup_background_blocker); // make all bloks clickable after closing previous two bloks
             }, 500); // back rotate blocks in case when two image is not same:
 
             setTimeout(() => {
@@ -434,6 +440,9 @@ gameContainer.addEventListener("click", function (event) {
             current_game_info.openedBlock.splice(-2, 2);
 
          } else {
+
+            show(popup_background_blocker); // cant't click others block when two bloks are open 
+            setTimeout(() => hide(popup_background_blocker), 500);  // make all bloks clickable after closing previous two bloks
             if (current_game_info.openedBlock.length === 2) {
                stoptime = true; // stop woriking time until reset will be called one second later
                setTimeout(() => {
@@ -593,7 +602,7 @@ current_game_popup.addEventListener("click", function (event) {
       hide(event.currentTarget, popup_background_blocker);
       current_game_popup.dataset.openBtnName = "Start";
       resetTimer();
-      // get and after set current player name so that the name does not change after the restart
+      // get and after set current player name so the name should not change after the restart
       let info = getCurrentGameInfo();
       let name = info.playerInfo.name
       show(popup_background_blocker)
