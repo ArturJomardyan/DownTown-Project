@@ -68,7 +68,6 @@ let sec = 0;
 let stoptime = false;
 
 function timerCycle() {
-
    if (!stoptime) {
 
       sec = Number(sec);
@@ -125,7 +124,6 @@ function resetTimer() {
 
 
 function drawRecordsList() {
-
    let list = getRecordsList();
 
    if (tBody.children.length > 1) {
@@ -185,7 +183,6 @@ function renderByStatus() {
       gameOver_info(container_endGame);
       return
    };
-
 }
 
 renderByStatus();
@@ -417,7 +414,6 @@ gameContainer.addEventListener("click", function (event) {
                if (arrRecordsList.length === 1) {
                   current_game_info.playerInfo.message = `You took 1-st place`
                } else {
-
                   arrRecordsList = arrRecordsList.sort((a, b) => {
                      a = get_milliseconde_from_time(a.time);
                      b = get_milliseconde_from_time(b.time);
@@ -450,10 +446,8 @@ gameContainer.addEventListener("click", function (event) {
                current_game_info.playerInfo.time = gameDuration
 
                setCurrentGameInfo(current_game_info);
-
                gameOver_info(container_endGame);
             }
-
          }
       }
       setCurrentGameInfo(current_game_info); // for case when block is opened after reloading page still stay opened
@@ -471,7 +465,6 @@ function get_time_from_milliseconde(num) {
    let time = ""
    num = num / 1000
    if (num > 3599) {
-
       let hour = Math.trunc(String(num / 3600));
       if (hour < 10) {
          hour = "0" + hour;
@@ -481,10 +474,7 @@ function get_time_from_milliseconde(num) {
       min = min.split(":").splice(1).join(":");
       time = hour + ":" + min
       return time
-
    } else if (num > 59 && num < 3600) {
-
-
       let min = Math.trunc(String(num / 60));
       let sec = num % 60;
       sec = Math.ceil(sec);
@@ -504,9 +494,7 @@ function get_time_from_milliseconde(num) {
          time = "00:" + min + ":" + sec;
          return time
       }
-
    } else {
-
       if (num < 10) {
          time = "00:00:0" + num;
          return time
@@ -515,13 +503,11 @@ function get_time_from_milliseconde(num) {
          time = "00:00:" + num;
          return time
       }
-
    }
 }
 
 
 function get_milliseconde_from_time(time) {
-
    let [hr, min, sec] = time.split(":");
 
    let hr_mill = Number(hr) * 3600000;
@@ -531,12 +517,10 @@ function get_milliseconde_from_time(time) {
    let convert_time_mill = hr_mill + min_mill + sec_mill
 
    return convert_time_mill
-
 }
 
 
 current_game_popup.addEventListener("click", function (event) {
-
    if (event.target.innerText === "Yes" && current_game_popup.dataset.openBtnName === "Start") {
       hide(event.currentTarget, popup_background_blocker);
       let player = getCurrentGameInfo()
@@ -589,7 +573,6 @@ current_game_popup.addEventListener("click", function (event) {
    if (event.target.innerText === "Cancel" && current_game_popup.dataset.openBtnName === "Menu") {
       hide(event.currentTarget, popup_background_blocker);
    }
-
 });
 
 
