@@ -305,8 +305,8 @@ container_endGame.addEventListener("click", function (event) {
       info = getCurrentGameInfo();
       info.playerInfo.name = name
       setCurrentGameInfo(info);
-      setStatus("container_game");
-      renderByStatus();
+      hide(container_endGame);
+      show(container_game);
       return
    }
    if (event.target.innerText === "Menu") {
@@ -406,7 +406,7 @@ gameContainer.addEventListener("click", function (event) {
          } else {
             show(popup_background_blocker); // cant't click others block when two bloks are open 
             setTimeout(() => hide(popup_background_blocker), 500);  // make all bloks clickable after closing previous two bloks
-            if (current_game_info.openedBlock.length === 16) {
+            if (current_game_info.openedBlock.length === 2) {
                stoptime = true; // stop woriking time until reset will be called one second later
                setTimeout(() => {
                   setStatus("container_endGame");
@@ -550,6 +550,9 @@ current_game_popup.addEventListener("click", function (event) {
    if (event.target.innerText === "Yes" && current_game_popup.dataset.openBtnName === "Restart") {
       hide(event.currentTarget, popup_background_blocker);
       current_game_popup.dataset.openBtnName = "Start";
+      let list = getRecordsList();
+      list.lastGame = list.previousGame;
+      setRecordsList(list);
       resetTimer();
       // get and after set current player name so the name should not change after the restart
       let info = getCurrentGameInfo();
