@@ -396,7 +396,7 @@ gameContainer.addEventListener("click", function (event) {
          } else {
             show(popup_background_blocker); // cant't click others block when two bloks are open 
             setTimeout(() => hide(popup_background_blocker), 500);  // make all bloks clickable after closing previous two bloks
-            if (current_game_info.openedBlock.length === 2) {
+            if (current_game_info.openedBlock.length === 16) {
                stoptime = true; // stop woriking time until reset will be called one second later
                setTimeout(() => {
                   setStatus("container_endGame");
