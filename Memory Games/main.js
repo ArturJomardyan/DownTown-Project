@@ -185,52 +185,8 @@ function renderByStatus() {
       gameOver_info(container_endGame);
       return
    };
-   if (currentPageStatus === "container_game") {
 
-      // let timeNow = +new Date();
-
-      // gameStartTime = info.playerInfo.time
-      // time = get_time_from_milliseconde(timeNow - gameStartTime);
-      // time = time.split(".")[0]; // cut millisecond
-
-      // time = time.split(":")
-      // hr = time[0];
-      // min = time[1];
-      // sec = time[2];
-      // startTimer()
-
-      // player.innerText = info.playerInfo.name
-
-      // let divCollection = gameContainer.querySelectorAll(".flip-card");
-      // if (divCollection.length) divCollection.forEach(el => el.remove());
-
-      // let userInfo = getCurrentGameInfo();
-      // let firstBlockImg = userInfo.openedBlock[0].img_index
-      // let secondBlockImg = userInfo.openedBlock[1].img_index
-
-
-      // for (let i = 0; i < 16; i++) {
-      //    let gameContainer_block = cloneCard.cloneNode(true);
-      //    gameContainer_block.classList.remove("forClone");
-      //    gameContainer_block.classList.remove("hide");
-      //    gameContainer_block.dataset.id = i + 1;
-      //    gameContainer.append(gameContainer_block);
-
-      //    if (userInfo.openedBlock.length === 1) {
-      //       let firstBlockIndex = userInfo.openedBlock[0].block_child_Index;
-      //       let firstBlockImg = userInfo.openedBlock[0].img_index
-
-      //       if (gameContainer_block.dataset.id === firstBlockIndex) {
-      //          gameContainer_block.style.transform = "rotateY(180deg)";
-      //          gameContainer_block.firstElementChild.style.transform = "rotateY(180deg)";
-      //          gameContainer_block.firstElementChild.lastElementChild.style.backgroundImage = `url('images/img_${firstBlockImg}.png')`;
-      //       }
-      // }
-
-      // }
-   }
 }
-
 
 renderByStatus();
 
@@ -413,7 +369,6 @@ gameContainer.addEventListener("click", function (event) {
       current_game_info.openedBlock.push(currentOpenedBlock);
 
       if (current_game_info.openedBlock.length % 2 === 0) {
-
 
          if (current_game_info.openedBlock.at(-1).img_index !== current_game_info.openedBlock.at(-2).img_index) {
 
