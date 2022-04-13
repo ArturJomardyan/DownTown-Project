@@ -156,12 +156,12 @@ function drawRecordsList() {
    }
 }
 
-function goToMenu(){
+function goToMenu(str = "container_start"){
    let list = getRecordsList();
    list.lastGame = list.previousGame;
    setRecordsList(list);
    resetTimer();
-   setStatus("container_start");
+   setStatus(str);
    renderByStatus();
 }
 
@@ -543,8 +543,7 @@ current_game_popup.addEventListener("click", function (event) {
 
    if (event.target.innerText === "Back" && current_game_popup.dataset.openBtnName === "Start") {
       hide(event.currentTarget, popup_background_blocker);
-      setStatus("container_name");
-      renderByStatus();
+      goToMenu("container_name");
       return;
    }
 
